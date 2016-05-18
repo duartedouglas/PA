@@ -28,14 +28,11 @@ body{
 
 
 .produto .bar{
-/*   background-color:#5c9bb7;
-   background-image:-webkit-linear-gradient(top, #5c9bb7, #5392ad);
-   background-image:-moz-linear-gradient(top, #5c9bb7, #5392ad);
-   background-image:linear-gradient(top, #5c9bb7, #5392ad);*/
+
    box-shadow: 0 1px 1px #ccc;
    border-radius: 2px;
    width: 100%;
-   padding: 10px;
+   padding: 5px;
    margin: -25px auto 5px;
    position:relative;
    text-align:right;
@@ -145,8 +142,6 @@ body{
 
 .produto ul.auto {
     position: absolute;
-    height: 60%;
-    overflow: auto;
     /* left: 60px; */
     /* top: 90px; */
     width: 80%;
@@ -159,6 +154,12 @@ body{
     z-index: 100;
 }
 
+.produto ul.auto.fixed{
+    position: fixed;
+    top: 0;
+    /*height: 60%;*/
+    overflow: auto;
+}
 .produto ul.auto li{
     line-height: 35px;
     border-bottom: 1px solid #ddd;

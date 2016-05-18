@@ -15,7 +15,7 @@ new Vue({
 	el: '#main',
 	data: {
         keyword: "",
-		layout: 'grid1',
+		layout: 'list',
         inputFocus:false,
         autocomplete:[],
         produtos: []

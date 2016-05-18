@@ -23,6 +23,11 @@ h1 {
 	margin: 5px auto 10px; 
 	overflow: hidden; 
 }
+.campos.fixed{
+	position: fixed;
+	top: 25px;
+	z-index: 999;
+}
 
 .campos label { 
 	background: #333; 
@@ -45,7 +50,7 @@ h1 {
 	font: 15px 'Open Sans',Arial; 
 	height: 30px;
 	padding: 9px;
-	width: 70%; 
+	width: 100%; 
 }
 
 .campos input[type="button"] { 
@@ -70,7 +75,7 @@ h1 {
 #mapa { 
 	/*width: 99%;*/
 	height: 330px;
-	border: 5px solid #ccc;;
+	/*border: 5px solid #ccc;;*/
 	margin-bottom: 20px;
 }
 
