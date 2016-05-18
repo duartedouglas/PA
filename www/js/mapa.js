@@ -133,6 +133,7 @@ $(document).ready(function () {
 			map.setCenter(location);
 			buscaSupermercados(map, location);
 			map.setZoom(14);
+			$(this).blur();
 		}
 	});
 	
