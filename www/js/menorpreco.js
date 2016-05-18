@@ -34,6 +34,7 @@ new Vue({
                 return;
             }
             this.keyword = '';
+            this.inputFocus = false;
             e.target.classList.add('_block');
             this.produtos.push(p);
             localStorage.setItem('list', JSON.stringify(this.produtos));

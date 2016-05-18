@@ -47,7 +47,8 @@ function initialize() {
 	var options = {
 		zoom: 5,
 		center: latlng,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		disableDefaultUI: true
 	};
 	
 	map = new google.maps.Map(document.getElementById("mapa"), options);
