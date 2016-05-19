@@ -45,9 +45,9 @@ self.addEventListener('install', function(event){
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       return Promise.all(
-      	files.map(function(file){
-      		return cache.add(file);
-      	})
+      	// files.map(function(file){
+      	// 	return cache.add(file);
+      	// })
       );
     })
   );
