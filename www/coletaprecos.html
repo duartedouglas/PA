@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css"  rel="stylesheet" >
+</head>
+<body>
+<style type="text/css">
+	.ui-autocomplete {
+		margin-top: 15px;
+	}
+</style>
+ <div class="container">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	  
+	  	<form role="form" >
+	  		<div class="form-body">
+	  			<div class="form-group">
+	  				<div class="input-icon input-icon-lg right">
+	  					<i class="fa fa-cart-arrow-down"></i>
+	  					<input id="kw" name="keyword" type="text" class="form-control input-lg" placeholder="busca produto"> </div>
+	  				</div>
+	  			</div>
+	  		</form>
+	</nav>
+
+	<table class="table table-striped" style="margin: 80px 0 "> 
+	    <tbody id="lista"></tbody>
+	</table>
+</div>
+<script  src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+<script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"   integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="   crossorigin="anonymous"></script>
+<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+<script type="text/javascript">
+	'use strict';
+    var myFirebaseRef = new Firebase("https://menorpreco.firebaseio.com/");
+
+
+  void function() {
+
+  	    class Produto {
+  	    	constructor(props) {
+  	    		this.id            = props.id;
+  	    		this.categoryid    = props.categoryid;
+  	    		this.productname   = props.productname;
+  	    		this.specification = props.specification;
+  	    		this.thumbnail     = props.thumbnail;
+  	    	}
+  	    	set Preco(p) {
+  	    		this.preco = p + ',00';
+  	    	}
+  	    	get Preco() {
+  	    		return this.preco;
+  	    	}
+  	    }
+
+
+        var cache = {};
+        $( "#kw" ).autocomplete({
+          minLength: 3,
+          source: function( request, response ) {
+            var term = request.term;
+            if ( term in cache ) {
+              response( cache[ term ] );
+              return;
+            }
+     
+     	     var keyword  = term.trim(),
+             keyword = keyword.replace(/\s+/g, "+"),
+             params = "keyword=" + keyword+"&format=json";
+            $.getJSON( "http://sandbox.buscape.com/service/findProductList/4a567762457178412b52303d/?"+params, request, function( data, status, xhr ) {
+            	var itens = [];
+            	for (var i in data.product) {
+            	   itens.push(data.product[i].product)
+            	}
+              cache[ term ] = itens;
+              response( itens );
+            });
+          },
+          select: function( event, ui ) {
+	        let p = new Produto(ui.item);
+
+            myFirebaseRef.child('produtos/'+p.id).update(p);
+	      },
+        }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+	        return $( "<li>" ).append(  item.productname  ).appendTo( ul );
+	    };
+
+
+        let table = document.getElementById('lista');
+            
+        let montaLista = (c) => {
+            let tr = document.createElement('tr');
+            let tdImg = document.createElement('td');
+            let td = document.createElement('td');
+
+            let tdPreco = document.createElement('tdPreco');
+            let tdEnviar = document.createElement('tdEnviar');
+            let preco = document.createElement('input');
+            let enviar = document.createElement('button');
+
+            enviar.innerHTML = 'enviar';
+            td.innerHTML = c.id+" - "+ c.productname;
+            preco.value = c.preco||'';
+            tdPreco.appendChild(preco);
+           
+            enviar.addEventListener('click',(e) => {
+               c.preco = preco.value;
+               console.log(c);
+               myFirebaseRef.child('produtos/'+c.id).update(c);
+            });
+			
+			tdEnviar.appendChild(enviar);
+            
+            let img = new Image();
+            img.src = c.thumbnail.url;
+            img.width = 60;
+
+            tdImg.appendChild(img);
+            tr.appendChild(tdImg);
+            tr.appendChild(td);
+            tr.appendChild(tdPreco);
+            tr.appendChild(tdEnviar);
+
+            table.appendChild(tr);
+            
+        };
+
+        myFirebaseRef.child('produtos').on('child_added', (o, a) => {
+			montaLista(o.val())
+        });
+      
+    }();
+
+</script>
+</body>
+</html>
