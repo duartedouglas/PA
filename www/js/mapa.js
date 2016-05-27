@@ -25,6 +25,7 @@ function callback(results, status) {
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
       console.log(results[i]);
+
     }
   }
 }
@@ -33,10 +34,23 @@ function createMarker(place) {
   var placeLoc = place.geometry.location;
   var marker = new google.maps.Marker({
     map: map,
-    position: place.geometry.location
+    position: place.geometry.location,
+
   });
+  infowindow.open(map, marker);
+     $('#enviar').on('click', function (e) {
+     	e.preventDefault();
+     	var email = $(".modal-body").find("#email").val();
+     	var lat = $('#txtLatitude').val();
+     	var long = $('#txtLongitude').val();
+     	$('#myModal').modal('hide');
+     	console.log(email, lat, long);
+     })
 
   google.maps.event.addListener(marker, 'click', function() {
+  	// var email = prompt("");
+   $('#myModal').modal('show');
+
     infowindow.setContent(place.name);
     infowindow.open(map, this);
   });
