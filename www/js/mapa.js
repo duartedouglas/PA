@@ -31,29 +31,31 @@ function callback(results, status) {
 }
 
 function createMarker(place) {
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location,
+	var placeLoc = place.geometry.location;
+	var marker = new google.maps.Marker({
+		map: map,
+		position: place.geometry.location,
 
-  });
-  infowindow.open(map, marker);
-     $('#enviar').on('click', function (e) {
-     	e.preventDefault();
-     	var email = $(".modal-body").find("#email").val();
-     	var lat = $('#txtLatitude').val();
-     	var long = $('#txtLongitude').val();
-     	$('#myModal').modal('hide');
-     	console.log(email, lat, long);
-     })
+	});
+	infowindow.open(map, marker);
 
-  google.maps.event.addListener(marker, 'click', function() {
-  	// var email = prompt("");
-   $('#myModal').modal('show');
+	$('#enviar').on('click', function (e) {
+		e.preventDefault();
+		var email = $(".modal-body").find("#email").val();
+		var lat = $('#txtLatitude').val();
+		var long = $('#txtLongitude').val();
+		$('#myModal').modal('hide');
+		console.log(email, lat, long);
+	})
 
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
-  });
+	google.maps.event.addListener(marker, 'mouseover', function() {
+
+		console.log(place)
+		//$('#myModal').modal('show');
+
+		infowindow.setContent(place.name+'<br>'+place.vicinity);
+		infowindow.open(map, this);
+	});
 }
 
 function initialize() {
@@ -62,7 +64,9 @@ function initialize() {
 		zoom: 5,
 		center: latlng,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		disableDefaultUI: true
+		disableDefaultUI: true,
+		scrollwheel: false,
+		draggable: false,
 	};
 	
 	map = new google.maps.Map(document.getElementById("mapa"), options);
@@ -79,19 +83,19 @@ function initialize() {
 
 $(document).ready(function () {
 
-	 initialize();
-	
+	initialize();
+
 	function carregarNoMapa(endereco) {
 		geocoder.geocode({ 'address': endereco + ', Brasil', 'region': 'BR' }, function (results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				if (results[0]) {
 					var latitude = results[0].geometry.location.lat();
 					var longitude = results[0].geometry.location.lng();
-		
+
 					$('#txtEndereco').val(results[0].formatted_address);
 					$('#txtLatitude').val(latitude);
-                   	$('#txtLongitude').val(longitude);
-		
+					$('#txtLongitude').val(longitude);
+
 					var location = new google.maps.LatLng(latitude, longitude);
 					marker.setPosition(location);
 					map.setCenter(location);
@@ -108,7 +112,7 @@ $(document).ready(function () {
 	})
 	
 	$("#txtEndereco").blur(function() {
-		$(this).addClass('fixed');
+		
 		$('#mapa').height($(window).height());
 		if($(this).val() != "")
 			carregarNoMapa($(this).val());

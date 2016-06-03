@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="theme-color" content="#337ab7">
-     <title>MENOR PREÇO</title>
+    <title>MENOR PREÇO</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,325 +27,319 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
 
 <body id="main">
-    <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-       <ul class="sidebar-nav">
-          <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-          <li class="sidebar-brand">
-              <a href="#top"  onclick = $("#menu-close").click(); >MENOR PREÇO</a>
-          </li>
-          <li>
-              <a href="#top" onclick = $("#menu-close").click(); >Home</a>
-          </li>
-          <li>
-              <a href="#about" onclick = $("#menu-close").click(); >Sobre o Menor Preço</a>
-          </li>
-          <li>
-              <a href="#services" onclick = $("#menu-close").click(); >Serviços</a>
-          </li>
-          <li>
-              <a href="#portfolio" onclick = $("#menu-close").click(); >Portfolio</a>
-          </li>
-          <li>
-              <a href="#contact" onclick = $("#menu-close").click(); >Contato</a>
-          </li>
-      </ul>
-    </nav>
+<!-- Navigation -->
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand">
+            <a href="#top"  onclick = $("#menu-close").click(); >MENOR PREÇO</a>
+        </li>
+        <li>
+            <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+        </li>
+        <li>
+            <a href="#about" onclick = $("#menu-close").click(); >Sobre o Menor Preço</a>
+        </li>
+        <li>
+            <a href="#services" onclick = $("#menu-close").click(); >Serviços</a>
+        </li>
+        <li>
+            <a href="#portfolio" onclick = $("#menu-close").click(); >Portfolio</a>
+        </li>
+        <li>
+            <a href="#contact" onclick = $("#menu-close").click(); >Mapa</a>
+        </li>
+    </ul>
+</nav>
 
-    <!-- Header -->
-    <header id="top" class="header" style="opacity: .7">
+<!-- Header -->
+<header id="top" class="header" style="opacity: .7">
 
-        <div class="text-vertical-center">
-            <img src="img/logo.png" style="width: 166px">
+    <div class="text-vertical-center">
+        <img src="img/logo.png" style="width: 166px">
 
 
-            <h3 style="font-weight: bold">O PREÇO QUE VOCÊ PRECISA, PERTO DE VOCÊ</h3>
-            <br>
+        <h3 style="font-weight: bold">O PREÇO QUE VOCÊ PRECISA, PERTO DE VOCÊ</h3>
+        <br>
 
-            <div class="input-group input-group-lg" style="width:480px;margin: 0 auto">
-                <span class="input-group-addon" id="basic-addon1">
+        <div class="input-group input-group-lg col-xs-11 col-sm-6" style="margin: 0 auto">
+                <span class="input-group-addon">
                     <i class="glyphicon glyphicon-search"></i>
                 </span>
-                <input placeholder="Procure por produtos" class="form-control" type="text">
-            </div>
-            <br>
-            <a href="/app" class="btn btn-primary btn-lg">Criar lista</a>
-            <!--<a href="coletaprecos.html" class="btn btn-primary btn-lg">Contribuir</a>-->
+            <input placeholder="Procure por produtos" class="form-control " type="text">
         </div>
+        <br>
+        <a href="/app" class="btn btn-primary btn-lg">Criar lista</a>
+        <!--<a href="coletaprecos.html" class="btn btn-primary btn-lg">Contribuir</a>-->
+    </div>
 
-    </header>
+</header>
+<style>
+    .font-grey{
+        color: #666;
+    }
+    .mp-label{
+        margin-bottom: 31px;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+<!-- About -->
+<section id="about" class="about produto">
+    <div class="container">
+        <h3 class="mp-label font-grey">Veja nosso video!</h3>
+    </div>
 
-    <!-- About -->
-    <section id="about" class="about produto">
-            <div class="container">
-                <h3 style="
-                    margin-bottom: 31px;
-                    color: #666;
-                    font-weight: bold;
-                    text-align: center;
-                    ">Veja nosso video!</h3>
-            </div>
-
-        <div class="row bg-primary" style="padding: 5px">
-            <div class="col-xs-12 col-sm-6" style="background-color: #000;margin: 0 auto">
-                <iframe width="100%"  height="350" src="https://www.youtube.com/embed/lWfYQU0zTvQ" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="col-xs-12 col-sm-6 " style="margin: 0 auto">
-                <h3 style="
-                    margin-top: 41px;
-                    margin-bottom: 14px;
-
-                    font-weight: bold;
-
-                    text-align: center;
-                    ">PodCast: economia familiar!</h3>
-                <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/136057701&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false"></iframe>
-
-            </div>
+    <div class="row bg-primary">
+        <div class="col-xs-12 col-sm-6" >
+            <iframe width="100%"  height="350" src="https://www.youtube.com/embed/lWfYQU0zTvQ" frameborder="0" allowfullscreen></iframe>
         </div>
+        <div class="col-xs-12 col-sm-6 " style="margin: 0 auto">
+            <h3 class="mp-label">PodCast: economia familiar!</h3>
+            <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/136057701&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false"></iframe>
 
+        </div>
+    </div>
 
+</section>
 
-    </section>
-
-     <!-- Services -->
-     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-     <section id="services" class="services bg-primary">
-         <div class="container">
-             <div class="row text-center">
-                 <div class="col-lg-10 col-lg-offset-1">
-                     <h2>NOSSOS SEVIÇOS</h2>
-                     <hr class="small" style="margin: 0 auto;">
-                     <div class="row">
-                         <div class="col-md-3 col-sm-6">
-                             <div class="service-item">
+<!-- Services -->
+<!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+<section id="services" class="services bg-primary">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h2>NOSSOS SEVIÇOS</h2>
+                <hr class="small" style="margin: 0 auto;">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="service-item">
                                  <span class="fa-stack fa-4x">
                                      <i class="fa fa-circle fa-stack-2x"></i>
                                      <i class="fa fa-pencil-square-o fa-stack-1x text-primary"></i>
                                  </span>
-                                 <h4>
-                                     <strong>CRIE</strong>
-                                 </h4>
-                                 <p>CRIA SUA LISTA DE COMPRAS RAPIDAMENTE.</p>
-                                 <a href="#" class="btn btn-light">SAIBA MAIS</a>
-                             </div>
-                         </div>
-                         <div class="col-md-3 col-sm-6">
-                             <div class="service-item">
+                            <h4>
+                                <strong>CRIE</strong>
+                            </h4>
+                            <p>CRIA SUA LISTA DE COMPRAS RAPIDAMENTE.</p>
+                            <a href="#" class="btn btn-light">SAIBA MAIS</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="service-item">
                                  <span class="fa-stack fa-4x">
                                      <i class="fa fa-circle fa-stack-2x"></i>
                                      <i class="fa fa-compass fa-stack-1x text-primary"></i>
                                  </span>
-                                 <h4>
-                                     <strong>INDIQUE</strong>
-                                 </h4>
-                                 <p>INDICA O MELHOR LOCAL PARA SUAS COMPRAS.</p>
-                                 <a href="#" class="btn btn-light">SAIBA MAIS</a>
-                             </div>
-                         </div>
-                         <div class="col-md-3 col-sm-6">
-                             <div class="service-item">
+                            <h4>
+                                <strong>INDIQUE</strong>
+                            </h4>
+                            <p>INDICA O MELHOR LOCAL PARA SUAS COMPRAS.</p>
+                            <a href="#" class="btn btn-light">SAIBA MAIS</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="service-item">
                                  <span class="fa-stack fa-4x">
                                  <i class="fa fa-circle fa-stack-2x"></i>
                                  <i class="fa fa-money fa-stack-1x text-primary"></i>
                              </span>
-                                 <h4>
-                                     <strong>ECONOMIZE</strong>
-                                 </h4>
-                                 <p>COMPARA E ENCONTRA OS MELHORES PREÇOS.</p>
-                                 <a href="#" class="btn btn-light">SAIBA MAIS</a>
-                             </div>
-                         </div>
-                         <div class="col-md-3 col-sm-6">
-                             <div class="service-item">
+                            <h4>
+                                <strong>ECONOMIZE</strong>
+                            </h4>
+                            <p>COMPARA E ENCONTRA OS MELHORES PREÇOS.</p>
+                            <a href="#" class="btn btn-light">SAIBA MAIS</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="service-item">
                                  <span class="fa-stack fa-4x">
                                  <i class="fa fa-circle fa-stack-2x"></i>
                                  <i class="fa fa-shopping-cart fa-stack-1x text-primary"></i>
                              </span>
-                                 <h4>
-                                     <strong>COMPRE</strong>
-                                 </h4>
-                                 <p>FAÇA SUAS COMPRAS COM O MELHOR CUSTO BENEFÍCIO.</p>
-                                 <a href="#" class="btn btn-light">SAIBA MAIS</a>
-                             </div>
-                         </div>
-                     </div>
-                     <!-- /.row (nested) -->
-                 </div>
-                 <!-- /.col-lg-10 -->
-             </div>
-             <!-- /.row -->
-         </div>
-         <!-- /.container -->
-     </section>
-
-
-
-     <!-- Portfolio -->
-     <section id="portfolio" class="portfolio">
-         <div class="container">
-             <div class="row">
-                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                     <h2>O MENOR PREÇO AO SEU ALCANCE</h2>
-                     <hr class="small">
-                     <div class="row">
-                         <div class="col-md-6">
-                             <div class="portfolio-item">
-                                 <a href="#">
-                                     <img class="img-portfolio img-responsive" src="img/portfolio-1-min.jpg">
-                                 </a>
-                             </div>
-                         </div>
-                         <div class="col-md-6">
-                             <div class="portfolio-item">
-                                 <a href="#">
-                                     <img class="img-portfolio img-responsive" src="img/portfolio-2-min.jpg">
-                                 </a>
-                             </div>
-                         </div>
-                         <div class="col-md-6">
-                             <div class="portfolio-item">
-                                 <a href="#">
-                                     <img class="img-portfolio img-responsive" src="img/portfolio-3-min.jpg">
-                                 </a>
-                             </div>
-                         </div>
-                         <div class="col-md-6">
-                             <div class="portfolio-item">
-                                 <a href="#">
-                                     <img class="img-portfolio img-responsive" src="img/portfolio-4-min.jpg">
-                                 </a>
-                             </div>
-                         </div>
-                     </div>
-                     <!-- /.row (nested) -->
-                     <a href="#" class="btn btn-dark">CONHEÇA</a>
-                 </div>
-                 <!-- /.col-lg-10 -->
-             </div>
-             <!-- /.row -->
-         </div>
-         <!-- /.container -->
-     </section>
-
-     <!-- Call to Action -->
-     <aside class="call-to-action bg-primary">
-         <div class="container">
-             <div class="row">
-                 <div class="col-lg-12 text-center">
-                     <h3>Compare o menor preço mais perto de você.</h3>
-                     <!-- <a href="#" class="btn btn-lg btn-light">Click Me!</a> -->
-                     <a href="#" id="localizar" class="btn btn-lg btn-dark">Me Localize</a>
-                 </div>
-             </div>
-         </div>
-     </aside>
-
-     <!-- Map -->
-     <section id="contact" class="map">
-         <form role="form">
-             <div class="form-body ">
-                 <fieldset>
-
-                     <div class="campos">
-                         <!-- <label for="txtEndereco"
-                         >Endereço</label> -->
-                         <input class="form-control" type="text" id="txtEndereco" name="txtEndereco" placeholder="digite seu cep ou endereço" />
-                         <!-- <input type="button" id="btnEndereco" name="btnEndereco" value="Mostrar no mapa"/> -->
-                     </div>
-                    <div>
-    
-                     <div id="mapa"></div>
-                     
-                     <div id="saimapa" style="display:none"> vsair do mapa;</div>
+                            <h4>
+                                <strong>COMPRE</strong>
+                            </h4>
+                            <p>FAÇA SUAS COMPRAS COM O MELHOR CUSTO BENEFÍCIO.</p>
+                            <a href="#" class="btn btn-light">SAIBA MAIS</a>
+                        </div>
                     </div>
-                     <!-- <input type="submit" value="Enviar" name="btnEnviar" /> -->
-                     
-                     <input type="hidden" id="txtLatitude" name="txtLatitude" />
-                     <input type="hidden" id="txtLongitude" name="txtLongitude" />
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.col-lg-10 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
 
-                 </fieldset>
-             </div>
-         </form>
-     </section>
+<!-- Portfolio -->
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h2>O MENOR PREÇO AO SEU ALCANCE</h2>
+                <hr class="small">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="portfolio-item">
+                            <a href="#">
+                                <img class="img-portfolio img-responsive" src="img/portfolio-1-min.jpg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="portfolio-item">
+                            <a href="#">
+                                <img class="img-portfolio img-responsive" src="img/portfolio-2-min.jpg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="portfolio-item">
+                            <a href="#">
+                                <img class="img-portfolio img-responsive" src="img/portfolio-3-min.jpg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="portfolio-item">
+                            <a href="#">
+                                <img class="img-portfolio img-responsive" src="img/portfolio-4-min.jpg">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row (nested) -->
+                <a href="#" class="btn btn-dark">CONHEÇA</a>
+            </div>
+            <!-- /.col-lg-10 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
 
-     <!-- Footer -->
-     <footer>
-         <div class="container">
-             <div class="row">
-                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                     <h4><strong>MENOR PREÇO</strong>
-                     </h4>
-                     <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
-                     <ul class="list-unstyled">
-                         <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                         <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
-                         </li>
-                     </ul>
-                     <br>
-                     <ul class="list-inline">
-                         <li>
-                             <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
-                         </li>
-                         <li>
-                             <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
-                         </li>
-                         <li>
-                             <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
-                         </li>
-                     </ul>
-                     <hr class="small">
-                     <p class="text-muted">Copyright &copy; menorpreco.com</p>
-                 </div>
-             </div>
-         </div>
-     </footer>
+<!-- Call to Action -->
+<aside class="call-to-action bg-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3>Compare o menor preço mais perto de você.</h3>
+                <!-- <a href="#" class="btn btn-lg btn-light">Click Me!</a> -->
+                <a href="#" id="localizar" class="btn btn-lg btn-dark">Me Localize</a>
+            </div>
+        </div>
+    </div>
+</aside>
 
-       <!-- Modal -->
-       <div class="modal fade" id="myModal" role="dialog">
-         <div class="modal-dialog">
-         
-           <!-- Modal content-->
-           <div class="modal-content">
-             <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal">&times;</button>
-               <h4 class="modal-title"> MenorPreco informa</h4>
-             </div>
-             <div class="modal-body">
-                 <p>:( <h1>Ops.</h1><br>
-                    Ainda não temos informações desse estabelecimento,
-                    deixe seu email que te contataremos assim que tivermos seus preços!
-                 </p>
+<!-- Map -->
+<section id="contact" class="map">
+    <form role="form">
+        <div class="form-body ">
+            <section class="center-block">
+                <div class=" input-group input-group-lg col-xs-11 col-sm-6" style="margin: 20px auto 10px;z-index: 0;">
+
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-map-marker"></i>
+                    </span>
+
+                    <input class="form-control" type="text" id="txtEndereco" name="txtEndereco" placeholder="digite seu cep ou endereço" />
+                </div>
+
+                <div>
+
+                    <div id="mapa"></div>
+
+                    <div id="saimapa" style="display:none"> sair do mapa;</div>
+                </div>
+                <!-- <input type="submit" value="Enviar" name="btnEnviar" /> -->
+
+                <input type="hidden" id="txtLatitude" name="txtLatitude" />
+                <input type="hidden" id="txtLongitude" name="txtLongitude" />
+
+            </section>
+        </div>
+    </form>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h4><strong>MENOR PREÇO</strong>
+                </h4>
+                <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
+                    <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
+                    </li>
+                </ul>
+                <br>
+                <ul class="list-inline">
+                    <li>
+                        <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+                    </li>
+                </ul>
+                <hr class="small">
+                <p class="text-muted">Copyright &copy; menorpreco.com</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"> MenorPreco informa</h4>
+            </div>
+            <div class="modal-body">
+                <p>:( <h1>Ops.</h1><br>
+                Ainda não temos informações desse estabelecimento,
+                deixe seu email que te contataremos assim que tivermos seus preços!
+                </p>
                 <input class="form-control" type="email" name="email" id="email">
-             </div>
-             <div class="modal-footer">
-               <button id="enviar" type="button" class="btn btn-default">Enviar</button>
-             </div>
-           </div>
-           
-         </div>
-       </div>
+            </div>
+            <div class="modal-footer">
+                <button id="enviar" type="button" class="btn btn-default">Enviar</button>
+            </div>
+        </div>
 
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initialize" async defer></script> -->
-     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/vue.min.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="js/menorpreco.js"></script>
-    <script src="js/mapa.js"></script>
-    <script>
+    </div>
+</div>
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initialize" async defer></script> -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/vue.min.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="js/menorpreco.js"></script>
+<script src="js/mapa.js"></script>
+<script>
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {
         e.preventDefault();
@@ -374,7 +368,16 @@
             }
         });
     });
-    </script>
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-78713259-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 
 </body>
 
