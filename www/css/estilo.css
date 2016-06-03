@@ -44,13 +44,13 @@ h1 {
 
 .campos input[type="text"] { 
 	background: #FFF;
+	width: 480px;
 	color: #666;
 	display: block;
-	float: left;
-	font: 15px 'Open Sans',Arial; 
+	margin: 0 auto;
+	font: 15px 'Open Sans',Arial;
 	height: 30px;
 	padding: 9px;
-	width: 100%; 
 }
 
 .campos input[type="button"] { 
@@ -74,7 +74,7 @@ h1 {
 
 #mapa { 
 	/*width: 99%;*/
-	height: 330px;
+	height: 530px;
 	/*border: 5px solid #ccc;;*/
 	margin-bottom: 20px;
 }

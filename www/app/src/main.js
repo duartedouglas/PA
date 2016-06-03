@@ -3,10 +3,11 @@ import Router from 'vue-router'
 // import { domain, fromNow } from './filters'
 import App from './components/App.vue'
 import Produtos from './components/Produtos.vue'
-
+import ListaProdutos from './components/ListaProdutos.vue'
+import Categoria from './components/Categorias.vue';
 
 // install router
-Vue.use(Router)
+Vue.use(Router);
 
 // // register filters globally
 // Vue.filter('fromNow', fromNow)
@@ -18,6 +19,12 @@ var router = new Router()
 router.map({
   '/produtos/': {
     component: Produtos
+  },
+  '/lista/': {
+    component: ListaProdutos
+  },
+  '/categorias/': {
+    component: Categoria
   }
 })
 
@@ -25,8 +32,8 @@ router.beforeEach(function () {
   window.scrollTo(0, 0)
 })
 
-// router.redirect({
-//   '*': '/news/1'
-// })
+router.redirect({
+  '*': '/produtos/'
+})
 
 router.start(App, '#app')

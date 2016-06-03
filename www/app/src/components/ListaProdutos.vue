@@ -1,5 +1,4 @@
 <template>
-
     <ul class="mdl-list">
         <!--{{produtos | json}}-->
         <li v-for="p in produtos" class="mdl-list__item">
@@ -14,15 +13,16 @@
                 </span>
         </li>
     </ul>
-
 </template>
 <style>
-/**/
+    ul.mdl-list{
+        width: 100%;
+    }
 </style>
 <script>
-    import store from '../store'
+    import lista from '../store/listas'
     export default{
-        name:"produtos",
+        name:"listaProdutos",
         data(){
             return {
                 produtos:[]
@@ -32,23 +32,15 @@
 
             if (this.produtos.length == 0) {
 
-                    this.produtos = store.fetchProdutos(['']);
-
+                lista.fetchListaProdutos().then( p=>{
+                    this.produtos = p;
+                });
             }
-        },
-//        created () {
-//            store.on('produtos-updated', this.update)
-//        },
-
-        destroyed () {
-            store.removeListener('topstories-updated', this.update)
         },
 
         methods: {
-            update () {
-                store.fetchIProdutos([]).then(items => {
-                    this.items = items
-            })
+            remove () {
+
             }
         },
     }
