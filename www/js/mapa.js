@@ -112,7 +112,7 @@ $(document).ready(function () {
 	})
 	
 	$("#txtEndereco").blur(function() {
-		
+		$(this).addClass('fixed');
 		$('#mapa').height($(window).height());
 		if($(this).val() != "")
 			carregarNoMapa($(this).val());

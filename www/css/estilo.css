@@ -74,7 +74,7 @@ h1 {
 
 #mapa { 
 	/*width: 99%;*/
-	height: 430px;
+	height: 530px;
 	/*border: 5px solid #ccc;;*/
 	margin-bottom: 20px;
 }
@@ -122,4 +122,13 @@ input[type="submit"]:hover { background: #12587C }
 .ui-autocomplete .ui-corner-all { 
 	color: #666 !important;
 	display: block;
+}
+
+.font-grey{
+	color: #666;
+}
+.mp-label{
+	margin-bottom: 31px;
+	font-weight: bold;
+	text-align: center;
 }
