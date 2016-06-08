@@ -4,6 +4,8 @@ var marker;
 
 var infowindow;
 
+var firebaseRef = new Firebase("https://menorpreco.firebaseio.com/");
+
 function buscaSupermercados(map, posicao) {
 
   // var posicao = {lat: -19.981394, lng: -44.003248};
@@ -27,6 +29,8 @@ function callback(results, status) {
       console.log(results[i]);
 
     }
+
+	  firebaseRef.child('estabelecimentos/'+ui.item.id).update(ui.item);
   }
 }
 
