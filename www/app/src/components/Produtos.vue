@@ -28,7 +28,7 @@
                 produtos:[]
             }
         },
-        created(){
+        ready (){
 
             if (this.produtos.length == 0) {
 

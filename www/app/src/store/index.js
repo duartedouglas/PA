@@ -33,7 +33,7 @@ store.fetchProduto = id => {
     if (itemsCache[id]) {
       resolve(itemsCache[id])
     } else {
-      api.child('produtos/' + id).once('value', snapshot => {
+      api.child('produtos/' + id).on('child_added', snapshot => {
         const story = itemsCache[id] = snapshot.val()
         resolve(story)
       }, reject)

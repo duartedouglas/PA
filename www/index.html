@@ -34,41 +34,59 @@
 </head>
 
 <body id="main">
-<!-- Navigation -->
-<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-<nav id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-        <li class="sidebar-brand">
-            <a href="#top"  onclick = $("#menu-close").click(); >MENOR PREÇO</a>
-        </li>
-        <li>
-            <a href="#top" onclick = $("#menu-close").click(); >Home</a>
-        </li>
-        <li>
-            <a href="#about" onclick = $("#menu-close").click(); >Sobre o Menor Preço</a>
-        </li>
-        <li>
-            <a href="#services" onclick = $("#menu-close").click(); >Serviços</a>
-        </li>
-        <li>
-            <a href="#portfolio" onclick = $("#menu-close").click(); >Portfolio</a>
-        </li>
-        <li>
-            <a href="#contact" onclick = $("#menu-close").click(); >Mapa</a>
-        </li>
-    </ul>
-</nav>
+
 
 <!-- Header -->
-<header id="top" class="header" style="opacity: .7">
+<div class="navbar navbar-fixed-top ">
 
-    <div class="text-vertical-center">
-        <img src="img/logo.png" style="width: 166px">
+    <div class="container">
 
+        <div id="kw-fixed" class="navbar-header" style="display: none">
+            <div class="input-group input-group-lg col-xs-10 col-md-9 col-sm-6">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+                <input id="kw" placeholder="Procure por produtos" class="form-control " type="text">
+            </div>
 
-        <h3 style="font-weight: bold">O PREÇO QUE VOCÊ PRECISA, PERTO DE VOCÊ</h3>
-        <br>
+        </div>
+        <!-- Navigation -->
+        <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+        <nav id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
+                    <i class="fa fa-times"></i>
+                </a>
+                <li class="sidebar-brand">
+                    <a href="#top"  onclick = $("#menu-close").click(); >MENOR PREÇO</a>
+                </li>
+                <li>
+                    <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+                </li>
+                <li>
+                    <a href="#about" onclick = $("#menu-close").click(); >Sobre o Menor Preço</a>
+                </li>
+                <li>
+                    <a href="#services" onclick = $("#menu-close").click(); >Serviços</a>
+                </li>
+                <li>
+                    <a href="#portfolio" onclick = $("#menu-close").click(); >Portfolio</a>
+                </li>
+                <li>
+                    <a href="#contact" onclick = $("#menu-close").click(); >Mapa</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</div>
+<div id="apresentacao" class="text-vertical-center mp-header">
+    <img src="img/logo.png" style="width: 166px">
+
+    <h3>O PREÇO QUE VOCÊ PRECISA, <span style="font-weight: bold">PERTO DE VOCÊ</span></h3>
+    <br>
+
+    <div>
 
         <div class="input-group input-group-lg col-xs-11 col-sm-6" style="margin: 0 auto">
                 <span class="input-group-addon">
@@ -76,10 +94,12 @@
                 </span>
             <input placeholder="Procure por produtos" class="form-control " type="text">
         </div>
-        <br>
-        <a href="/app" class="btn btn-primary btn-lg">Criar lista</a>
-        <!--<a href="coletaprecos.html" class="btn btn-primary btn-lg">Contribuir</a>-->
     </div>
+    <br>
+    <a href="/app" class="btn btn-primary btn-lg">Criar lista</a>
+    <!--<a href="coletaprecos.html" class="btn btn-primary btn-lg">Contribuir</a>-->
+</div>
+<header id="top" class="header" style="opacity: .7">
 
 </header>
 
@@ -323,8 +343,11 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initialize" async defer></script> -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
 <!-- jQuery -->
+<!--<script  src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>-->
+
 <script src="js/jquery.js"></script>
-<script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
+<script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"   integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="   crossorigin="anonymous"></script>
+<!--<script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>-->
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/vue.min.js"></script>
@@ -370,6 +393,83 @@
     ga('send', 'pageview');
 
 </script>
+<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+<script type="text/javascript">
+    'use strict';
+    var myFirebaseRef = new Firebase("https://menorpreco.firebaseio.com/");
+
+
+    void function() {
+
+        class Produto {
+            constructor(props) {
+                this.id            = props.id;
+                this.categoryid    = props.categoryid;
+                this.productname   = props.productname;
+                this.specification = props.specification;
+                this.thumbnail     = props.thumbnail;
+            }
+            set Preco(p) {
+                this.preco = p + ',00';
+            }
+            get Preco() {
+                return this.preco;
+            }
+        }
+
+        let cache = {};
+        let $kw =  $( "#kw" );
+        $kw.autocomplete({
+            minLength: 3,
+            source: function( request, response ) {
+                var term = request.term;
+                if ( term in cache ) {
+                    response( cache[ term ] );
+                    return;
+                }
+
+                var keyword  = term.trim(),
+                        keyword = keyword.replace(/\s+/g, "+"),
+                        params = "keyword=" + keyword+"&format=json";
+                $.getJSON( "http://sandbox.buscape.com/service/findProductList/4a567762457178412b52303d/?"+params, request, function( data, status, xhr ) {
+                    var itens = [];
+                    for (var i in data.product) {
+                        itens.push(new Produto(data.product[i].product ))
+                    }
+                    //console.log(itens)
+                    cache[ term ] = itens;
+                    response( itens );
+                });
+            },
+            select: function( event, ui ) {
+                //let p = new Produto(ui.item);
+
+                myFirebaseRef.child('produtos/'+ui.item.id).update(ui.item);
+            },
+        }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+            console.log(item)
+            return $( "<li>" ).append(
+                    //'<img src="'+item.thumbnail.formats[0].formats.url+'" width="45px"/>'+
+                    item.productname
+            ).appendTo( ul );
+        };
+
+        $kw.on('blur', function () {
+            $('#kw-fixed').hide();
+            $('#apresentacao').show();
+            $kw.parent().parent().removeClass("bg-primary");
+        })
+        $('#apresentacao input').on('focus', function () {
+            $('#apresentacao').hide();
+            $("#kw-fixed").show();
+            $kw.focus();
+            $kw.parent().parent().addClass("bg-primary");
+        })
+    }();
+
+</script>
+
 
 </body>
 

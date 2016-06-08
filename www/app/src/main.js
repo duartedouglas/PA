@@ -17,6 +17,9 @@ Vue.use(Router);
 var router = new Router()
 
 router.map({
+  '/': {
+    component: App
+  },
   '/produtos/': {
     component: Produtos
   },
@@ -33,7 +36,7 @@ router.beforeEach(function () {
 })
 
 router.redirect({
-  '*': '/produtos/'
+  '*': '/'
 })
 
 router.start(App, '#app')
