@@ -28,9 +28,19 @@ function callback(results, status) {
       createMarker(results[i]);
       console.log(results[i]);
 
+	  firebaseRef.child('estabelecimentos/'+ results[i].place_id).update(
+		  {
+			  place_id:results[i].place_id,
+			  location: {
+				  lat:results[i].geometry.location.lat(),
+				  lng:results[i].geometry.location.lat()
+			  },
+			  nome:results[i].name,
+			  endereco:results[i].vicinity,
+		  }
+	  );
     }
 
-	  firebaseRef.child('estabelecimentos/'+ui.item.id).update(ui.item);
   }
 }
 
