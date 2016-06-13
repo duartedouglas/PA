@@ -1,9 +1,9 @@
 <template>
-
-    <ul class="mdl-list">
-        <!--{{ categorias | json}}-->
-        <li v-for="c in categorias" class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
+    <div  class=" mdl-grid">
+        <ul class="mdl-list">
+            <!--{{ categorias | json}}-->
+            <li v-for="c in categorias" class="mdl-list__item mdl-color--white">
+                <span class="mdl-list__item-primary-content" v-link="{ path: '/404' }">
                     <img :src="c.thumb.url" alt="" class="mdl-list__item-avatar">
                     <!--<i class="material-icons ">person</i>-->
                     {{c.nome}}
@@ -12,9 +12,9 @@
                     <!--<span class="mdl-list__item-secondary-info">add</span>-->
                     <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
                 </span>
-        </li>
-    </ul>
-
+            </li>
+        </ul>
+    </div>
 </template>
 <style>
 

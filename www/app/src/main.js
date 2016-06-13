@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import { domain, fromNow } from './filters'
 import App from './components/App.vue'
+import Home from './components/Home.vue'
 import Produtos from './components/Produtos.vue'
 import ListaProdutos from './components/ListaProdutos.vue'
 import Categoria from './components/Categorias.vue';
@@ -18,7 +19,8 @@ var router = new Router()
 
 router.map({
   '/': {
-    component: App
+    component: Home
+    
   },
   '/produtos/': {
     component: Produtos
@@ -27,7 +29,12 @@ router.map({
     component: ListaProdutos
   },
   '/categorias/': {
-    component: Categoria
+    component: Categoria,
+    'subRoutes':{
+      '/produtos/:id':{
+        component:Produtos
+      }
+    }
   }
 })
 

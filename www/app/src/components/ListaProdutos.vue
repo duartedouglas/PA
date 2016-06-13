@@ -1,7 +1,8 @@
 <template>
-    <ul class="mdl-list">
-        <!--{{produtos | json}}-->
-        <li v-for="p in produtos" class="mdl-list__item">
+    <div class="mg-grid">
+        <ul class="mdl-list">
+            <!--{{produtos | json}}-->
+            <li v-for="p in produtos" class="mdl-list__item mdl-color--white">
                 <span class="mdl-list__item-primary-content">
                     <img :src="p.thumbnail.formats[0].formats.url" alt="" class="mdl-list__item-avatar">
                     <!--<i class="material-icons ">person</i>-->
@@ -11,10 +12,12 @@
                     <!--<span class="mdl-list__item-secondary-info">add</span>-->
                     <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
                 </span>
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
+
 </template>
-<style>
+<style scoped>
     ul.mdl-list{
         width: 100%;
     }
@@ -28,20 +31,17 @@
                 produtos:[]
             }
         },
-        created(){
-
+        created() {
             if (this.produtos.length == 0) {
-
-                lista.fetchListaProdutos().then( p=>{
+                lista.fetchListaProdutos().then( p => {
                     this.produtos = p;
                 });
             }
         },
-
         methods: {
             remove () {
 
             }
-        },
+        }
     }
 </script>
