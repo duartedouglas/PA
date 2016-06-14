@@ -19,13 +19,17 @@ var router = new Router()
 
 router.map({
   '/': {
-    component: Home
-    
+    component: Home,
+    'subRoutes':{
+      '/lista/:lista': {
+        component: ListaProdutos
+      }
+    }
   },
   '/produtos/': {
     component: Produtos
   },
-  '/lista/': {
+  '/lista/:lista': {
     component: ListaProdutos
   },
   '/categorias/': {
