@@ -1,8 +1,8 @@
-import Firebase from 'firebase'
-import { EventEmitter } from 'events'
-import { Promise } from 'es6-promise'
+import Firebase from './fb';
+import { EventEmitter } from 'events';
+import { Promise } from 'es6-promise';
 
-const api = new Firebase('https://menorpreco.firebaseio.com')
+const api = Firebase.database().ref();
 
 const categoria = {};
 

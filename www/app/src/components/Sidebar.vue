@@ -35,12 +35,7 @@
                 Categorias
             </a>
 
-            <a class="mdl-navigation__link" v-link="{ path: '/lista' }">
-                <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>
-                Lista de compras
-            </a>
-
-            <a class="mdl-navigation__link" v-link="{ path: '/404' }">
+            <a class="mdl-navigation__link" v-link="{ path: '/login' }">
                 <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a>
 
             <div class="mdl-layout-spacer"></div>

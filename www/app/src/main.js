@@ -6,6 +6,7 @@ import Home from './components/Home.vue'
 import Produtos from './components/Produtos.vue'
 import ListaProdutos from './components/ListaProdutos.vue'
 import Categoria from './components/Categorias.vue';
+import Login from './components/Login.vue';
 
 // install router
 Vue.use(Router);
@@ -31,6 +32,9 @@ router.map({
   },
   '/lista/:lista': {
     component: ListaProdutos
+  },
+  '/login/': {
+    component: Login
   },
   '/categorias/': {
     component: Categoria,

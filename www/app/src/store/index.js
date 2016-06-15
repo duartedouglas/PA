@@ -1,8 +1,10 @@
-import Firebase from 'firebase'
+import Firebase from './fb'
 import { EventEmitter } from 'events'
 import { Promise } from 'es6-promise'
 
-const api = new Firebase('https://menorpreco.firebaseio.com')
+ const api = Firebase.database().ref();
+
+// const api = new Firebase('https://menorpreco.firebaseio.com')
 const itemsCache = Object.create(null)
 const store = new EventEmitter()
 const storiesPerPage = store.storiesPerPage = 30

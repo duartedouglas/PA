@@ -1,14 +1,14 @@
-import Firebase from 'firebase'
-import { EventEmitter } from 'events'
-import { Promise } from 'es6-promise'
+import Firebase from './fb';
+import { EventEmitter } from 'events';
+import { Promise } from 'es6-promise';
 
-const api = new Firebase('https://menorpreco.firebaseio.com')
+const api = Firebase.database().ref();
 const produtosCache = {};
 const lista = {};
 
 let produtosIds = [];
 
-export default lista
+export default lista;
 
 //api.child('produtos').on('value', snapshot => {
 //    produtosIds = snapshot.val();
@@ -22,8 +22,8 @@ lista.fetchProduto = id => {
         } else {
             api.child('produtos/' + id).once('value', snapshot => {
                 const story = produtosCache[id] = snapshot.val();
-                resolve(story)
-            }, reject)
+                resolve(story);
+            }, reject);
         }
     })
 };

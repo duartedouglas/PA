@@ -16,8 +16,10 @@
         </ul>
     </div>
 </template>
-<style>
-
+<style scoped>
+    ul.mdl-list{
+        width: 100%;
+    }
 </style>
 <script>
 

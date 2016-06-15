@@ -23,12 +23,7 @@
                 <li class="mdl-menu__item">Termos de uso</li>
             </ul>
         </div>
-        <div class="mdl-textfield__search">
-            <input id="search" placeholder="pesquise produtos" class="mdl-textfield__input" type="text" >
-            <label class="mdl-button mdl-js-button mdl-button--icon icon-search" for="search">
-                <i class="material-icons ">search</i>
-            </label>
-        </div>
+
         <!-- Tabs -->
         <!--<div class="mdl-layout__tab-bar mdl-js-ripple-effect">-->
             <!--<a href="#fixed-tab-1" class="mdl-layout__tab is-active">Tab 1</a>-->
@@ -39,26 +34,7 @@
 
 </template>
 <style scoped>
-    input {
-        width: 100%;
-        height: 30px;
-        color: #9d9d9d;
-        border: 0;
-        border-radius: 3px;
-        background-color: #fff
-    }
-    .mdl-textfield__search {
-        padding: 5px 10px;
-    }
-    .icon-search {
-        color: #000;
-        right: 10px;
-        position: absolute;
-        top: 64px;
-    }
-    body{
-        /*background-color:#ff0000;*/
-    }
+
 </style>
 <script>
 

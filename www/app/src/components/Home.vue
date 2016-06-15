@@ -1,4 +1,5 @@
 <template>
+    <search-box></search-box>
     <div class="mdl-color--white">
         <div class="mdl-grid">
             <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
@@ -85,6 +86,7 @@
 <script>
     import Navbar from './Navbar.vue'
     import Sidebar from './Sidebar.vue'
+    import SearchBox from './SearchBox.vue'
     export default{
         name:'Home',
         data(){
@@ -95,7 +97,7 @@
         },
         components: {
             Navbar,
-            Sidebar,
+            Sidebar,SearchBox
         },
         created(){
             this.$parent.title = 'MenorPreço';

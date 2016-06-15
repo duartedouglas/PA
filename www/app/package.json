@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "es6-promise": "^3.0.2",
-    "firebase": "^2.3.1",
+    "firebase": "^3.0.0",
     "vue": "^1.0.8",
     "vue-router": "^0.7.5"
   }

@@ -23,7 +23,10 @@
     </div>
 
 </template>
-<style>
+<style scoped>
+    ul.mdl-list{
+        width: 100%;
+    }
     li.mdl-list__item.mdl-color--white {
         margin-bottom: 14px;
         line-height: inherit;
