@@ -116,7 +116,7 @@
                 // The signed-in user info.
                 var user = result.user;
                 // [START_EXCLUDE]
-                this.oauthtoken = token;
+                //this.oauthtoken = token;
                 // [END_EXCLUDE]
               }).catch(function(error) {
                 // Handle Errors here.
