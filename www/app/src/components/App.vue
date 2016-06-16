@@ -19,12 +19,16 @@
         name: 'App',
         data(){
             return {
-                title:'MenorPreço'
+                title:'MenorPreço',
+                accountDetails:{}
             }
         },
         components:{
             Navbar,
             Sidebar
+        },
+        ready(){
+
         }
     }
 </script>

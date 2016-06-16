@@ -4,7 +4,7 @@
             <!--{{ categorias | json}}-->
             <li v-for="c in categorias" class="mdl-list__item mdl-color--white">
                 <span class="mdl-list__item-primary-content" v-link="{ path: '/404' }">
-                    <img :src="c.thumb.url" alt="" class="mdl-list__item-avatar">
+                    <img v-lazy="c.thumb.url" alt="" class="mdl-list__item-avatar">
                     <!--<i class="material-icons ">person</i>-->
                     {{c.nome}}
                 </span>

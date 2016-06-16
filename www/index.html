@@ -26,7 +26,11 @@
 
     <link href="css/estilo.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/menorpreco.css">
-
+    <script type="text/javascript">
+    //lazyload imgs
+        var exports={};
+    </script>
+   
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -84,7 +88,7 @@
 
 </div>
 <div id="apresentacao" class="text-vertical-center mp-header">
-    <img src="img/android-chrome-144x144.png" >
+    <img :src="imgs.logo" >
 
     <h3>O PREÇO QUE VOCÊ PRECISA, <span style="font-weight: bold">PERTO DE VOCÊ</span></h3>
     <br>
@@ -208,28 +212,28 @@
                     <div class="col-md-6">
                         <div class="portfolio-item">
                             <a href="#">
-                                <img class="img-portfolio img-responsive" src="img/portfolio-1-min.jpg">
+                                <img class="img-portfolio img-responsive" v-lazy="imgs.portfolio1">
                             </a>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="portfolio-item">
                             <a href="#">
-                                <img class="img-portfolio img-responsive" src="img/portfolio-2-min.jpg">
+                                <img class="img-portfolio img-responsive" v-lazy="imgs.portfolio2">
                             </a>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="portfolio-item">
                             <a href="#">
-                                <img class="img-portfolio img-responsive" src="img/portfolio-3-min.jpg">
+                                <img class="img-portfolio img-responsive" v-lazy="imgs.portfolio3">
                             </a>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="portfolio-item">
                             <a href="#">
-                                <img class="img-portfolio img-responsive" src="img/portfolio-4-min.jpg">
+                                <img class="img-portfolio img-responsive" v-lazy="imgs.portfolio4">
                             </a>
                         </div>
                     </div>
@@ -355,6 +359,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/vue.min.js"></script>
 <!-- Custom Theme JavaScript -->
+<script src="app/node_modules/vue-lazyload/vue-lazyload.es5.js"></script>
 <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 <script src="js/menorpreco.js"></script>
 <script src="js/mapa.js"></script>

@@ -7,7 +7,7 @@
             <!--{{produtos | json}}-->
             <li v-for="p in produtos" class="mdl-list__item mdl-color--white">
                 <span class="mdl-list__item-primary-content">
-                    <img :src="p.thumbnail.formats[0].formats.url" alt="" class="mdl-list__item-avatar">
+                    <img v-lazy="p.thumbnail.formats[0].formats.url" alt="" class="mdl-list__item-avatar">
                     <!--<i class="material-icons ">person</i>-->
                     {{p.productname}}
                 </span>

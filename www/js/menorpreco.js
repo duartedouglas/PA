@@ -11,6 +11,11 @@ let mpCategorias = Vue.extend({
 });
 Vue.component('mp-categorias', mpCategorias);
 
+
+Vue.use(exports, {
+  loading: 'app/static/images/light_blue_material_design_loading.gif',
+  try: 3 // default 1
+});
 new Vue({
 	el: '#main',
 	data: {
@@ -18,7 +23,14 @@ new Vue({
 		layout: 'list',
         inputFocus:false,
         autocomplete:[],
-        produtos: []
+        produtos: [],
+        imgs:{
+            logo:'img/android-chrome-144x144.png',
+            portfolio1:'img/portfolio-1-min.jpg',
+            portfolio2:'img/portfolio-2-min.jpg',
+            portfolio3:'img/portfolio-3-min.jpg',
+            portfolio4:'img/portfolio-4-min.jpg',
+        },
 	},
     ready(){
       this.autocomplete = [];

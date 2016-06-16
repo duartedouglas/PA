@@ -1,7 +1,7 @@
 <template>
 
-<div class="mdl-layout mdl-js-layout mdl-color--grey-100">
-    <main class="mdl-layout__content">
+
+
         <div class="mdl-card mdl-shadow--6dp">
 
             <div class="mdl-card__supporting-text">
@@ -21,20 +21,13 @@
             </div>
             <button :disabled="googleDisabled" class="mdl-button mdl-js-button mdl-button--raised" @click="toggleSignIn">{{ signin }}</button>
 
-            <!-- Container where we'll display the user details -->
-            <div class="quickstart-user-details-container">
-              Firebase sign-in status: <span id="quickstart-sign-in-status">{{ status }}</span>
-              <div>Firebase auth <code>currentUser</code> object value:</div>
-              <pre><code id="quickstart-account-details">{{ accountDetails | json}}</code></pre>
-              <div>Google OAuth Access Token:</div>
-              <pre><code id="quickstart-oauthtoken">{{ oauthtoken }}</code></pre>
-            </div>
         </div>
-    </main>
-</div>
 
 </template>
 <style scoped>
+    .mdl-shadow--6dp{
+        width: 100%;
+    }
    .mdl-layout {
         align-items: center;
         justify-content: center;
@@ -58,12 +51,10 @@
             }
         },
         ready() {
-            let db = firebase.database().ref('users').on('value', u => {
-                        console.log(u.val())
-                    })
+
          firebase.auth().onAuthStateChanged((user) =>{
            if (user) {
-             // User is signed in.
+
              var displayName = user.displayName;
              var email = user.email;
              var emailVerified = user.emailVerified;
@@ -85,6 +76,7 @@
                refreshToken: refreshToken,
                providerData: providerData
              };
+             this.$route.redirect('/');
              // [END_EXCLUDE]
            } else {
 
