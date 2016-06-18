@@ -7,7 +7,7 @@ var files = [
     "static/styles.css",
     "https://fonts.googleapis.com/icon?family=Material+Icons",
     "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en",
-    "static/lib/material.min.js",
+    "static/lib/material.min.js"
 
     // "js/lib/quagga.min.js"
 ];
@@ -15,10 +15,10 @@ var files = [
 if (typeof files == 'undefined') {
     var files = [];
 } else {
-    files.push('./');
+    // files.push('./');
 }
 
-var CACHE_NAME = 'menorpreco-v2';
+var CACHE_NAME = 'menorpreco-v3';
 
 self.addEventListener('activate', function(event) {
     console.log('[SW] Activate');
@@ -50,7 +50,7 @@ self.addEventListener('install', function(event){
 });
 
 self.addEventListener('fetch', function(event) {
-    console.log(' fetch ' + event.request.url)
+    console.log(' fetch ' + event.request.url);
     event.respondWith(
         caches.match(event.request).then(function(response){
             return response || fetch(event.request.clone());
