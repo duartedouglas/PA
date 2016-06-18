@@ -2,7 +2,7 @@ import Firebase from './fb'
 import { EventEmitter } from 'events'
 import { Promise } from 'es6-promise'
 
- const api = Firebase.database().ref();
+ const api = Firebase.database().ref('produtos');
 
 // const api = new Firebase('https://menorpreco.firebaseio.com')
 const itemsCache = Object.create(null)
@@ -13,22 +13,13 @@ let produtosIds = []
 
 export default store
 
-/**
- * Subscribe to real time updates of the top 100 stories,
- * and cache the IDs locally.
- */
 
-api.child('produtos').on('value', snapshot => {
-  produtosIds = snapshot.val()
-  store.emit('produtos-updated')
-})
+api.on('value', snapshot => {
+  produtosIds = snapshot.val();
 
-/**
- * Fetch an item data with given id.
- *
- * @param {Number} id
- * @return {Promise}
- */
+  store.emit('produtos-updated', produtosIds);
+});
+
 
 store.fetchProduto = id => {
   return new Promise((resolve, reject) => {
@@ -54,9 +45,9 @@ store.fetchProdutos = ids => {
   if (!ids || !ids.length) {
     return Promise.resolve(produtosIds)
   } else {
-    // return Promise.all(ids.map(id => store.fetchProduto(id)))
+     return Promise.all(ids.map(id => store.fetchProduto(id)))
 
-     return produtosIds
+     //return produtosIds
   }
 }
 

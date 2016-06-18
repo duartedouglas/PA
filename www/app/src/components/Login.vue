@@ -1,27 +1,25 @@
 <template>
 
+    <div class="mdl-card mdl-shadow--6dp">
 
+        <div class="mdl-card__supporting-text">
 
-        <div class="mdl-card mdl-shadow--6dp">
-
-            <div class="mdl-card__supporting-text">
-                <form action="#">
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="text" id="username" />
-                        <label class="mdl-textfield__label" for="username">Usuario</label>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="password" id="userpass" />
-                        <label class="mdl-textfield__label" for="userpass">Senha</label>
-                    </div>
-                </form>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="username" />
+                <label class="mdl-textfield__label" for="username">Usuario</label>
             </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Logar</button>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="password" id="userpass" />
+                <label class="mdl-textfield__label" for="userpass">Senha</label>
             </div>
-            <button :disabled="googleDisabled" class="mdl-button mdl-js-button mdl-button--raised" @click="toggleSignIn">{{ signin }}</button>
 
         </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Logar</button>
+        </div>
+        <button :disabled="googleDisabled" class="mdl-button mdl-js-button mdl-button--raised" @click="toggleSignIn">{{ signin }}</button>
+
+    </div>
 
 </template>
 <style scoped>

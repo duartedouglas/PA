@@ -3,16 +3,16 @@
     <header class="mdl-layout__header is-casting-shadow">
 
         <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title">{{ title }}</span>
+            <span class="mdl-layout-title"  v-show="!inputFocus">{{ title }}</span>
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                <!--<label class="mdl-button mdl-js-button mdl-button&#45;&#45;icon" for="search">-->
-                    <!--<i class="material-icons">search</i>-->
-                <!--</label>-->
-                <!--<div class="mdl-textfield__expandable-holder">-->
-                    <!--<input class="mdl-textfield__input" type="text" id="search">-->
-                    <!--<label class="mdl-textfield__label" for="search">pesquise produtos</label>-->
-                <!--</div>-->
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                    <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" id="search">
+                    <label class="mdl-textfield__label" for="search">pesquise produtos</label>
+                </div>
             </div>
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
                 <i class="material-icons">more_vert</i>
@@ -43,11 +43,17 @@
         props:['title'],
         data(){
             return{
-
+                inputFocus:false
             }
         },
         ready(){
-            console.info('header')
+
+        },
+        methods:{
+            focusIn(){
+                this.inputFocus = !this.inputFocus;
+            }
         }
+
     }
 </script>

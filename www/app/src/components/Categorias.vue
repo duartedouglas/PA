@@ -1,5 +1,6 @@
 <template>
-    <div  class=" mdl-grid">
+
+    <div class=" mdl-grid">
         <ul class="mdl-list">
             <!--{{ categorias | json}}-->
             <li v-for="c in categorias" class="mdl-list__item mdl-color--white">

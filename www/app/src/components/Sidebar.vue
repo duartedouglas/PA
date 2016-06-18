@@ -3,7 +3,7 @@
     <div class=" mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
 
         <header v-if="user" class="demo-drawer-header">
-            <!--<img src="" class="demo-avatar">-->
+
             <img v-lazy="user.photoURL" class="demo-avatar">
             <div class="demo-avatar-dropdown">
                 <span>{{ user.displayName }}</span>
@@ -69,7 +69,10 @@
         ready(){
          Firebase.auth().onAuthStateChanged((user) =>{
            if (user) {
-             console.log(user)
+
+              console.log(user.uid);
+             if(user.isAnonymous){
+             }
              this.user = user;
 
              var displayName = user.displayName;
@@ -91,17 +94,10 @@
                refreshToken: refreshToken,
                providerData: providerData
              };
-             // [END_EXCLUDE]
            } else {
-
-             this.status = 'Signed out';
              this.signin = 'Entrar com Google';
              this.accountDetails = 'null';
-             this.oauthtoken = 'null';
-
            }
-
-           this.googleDisabled = false;
          });
         },
         methods:{

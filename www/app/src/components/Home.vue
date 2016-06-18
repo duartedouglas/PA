@@ -53,54 +53,52 @@
                 <!--</div>-->
                 <!--</div>-->
 
-                <dialog class="mdl-dialog">
-                    <div class="mdl-dialog__content">
-                        <p>
-                            Digite um nome para a lista
-                        </p>
-                        <form action="#">
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" v-model="nomeLista" type="text" id="nomeLista">
-                                <label class="mdl-textfield__label"  for="nomeLista">Supermercado...</label>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="mdl-dialog__actions ">
-                        <button @click="salvaLista" type="button" class="mdl-button">Ok</button>
-                        <button @click="cancelar" type="button" class="mdl-button close">Cancelar</button>
-                    </div>
-                </dialog>
 
 
             </div>
         </div>
+        <dialog class="mdl-dialog">
+            <div class="mdl-dialog__content">
+                <p>
+                    Digite um nome para a lista
+                </p>
 
-        <a @click="criarLista" class="circle-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-            <i class="material-icons" role="presentation">add</i>
-        </a>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" v-model="nomeLista" type="text" id="nomeLista">
+                    <label class="mdl-textfield__label"  for="nomeLista">Supermercado...</label>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button @click="salvaLista" type="button" class="mdl-button">Ok</button>
+                <button @click="cancelar" type="button" class="mdl-button close">Cancelar</button>
+            </div>
+        </dialog>
+        <button @click="criarLista" class="circle-button  mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+            <i class="material-icons">add</i>
+        </button>
+
     </div>
+
 </template>
 <style>
 
 </style>
 <script>
-    import Navbar from './Navbar.vue'
-    import Sidebar from './Sidebar.vue'
-    import SearchBox from './SearchBox.vue'
+    import SearchBox from './SearchBox.vue';
     export default{
         name:'Home',
         data(){
             return {
+                title:'Menor Preço',
                 nomeLista:'',
                 dialog:null
             }
         },
-        components: {
-            Navbar,
-            Sidebar,SearchBox
-        },
         created(){
-            this.$parent.title = 'MenorPreço';
+            this.$parent.title = 'Menor Preço';
+        },
+        components: {
+            SearchBox
         },
         ready(){
 

@@ -15,13 +15,15 @@ export default lista;
 //    store.emit('produtos-updated');
 //})
 
-lista.fetchProduto = id => {
+lista.fetchProduto = (id, qtd) => {
     return new Promise((resolve, reject) => {
         if (produtosCache[id]) {
             resolve(produtosCache[id])
         } else {
             api.child('produtos/' + id).once('value', snapshot => {
-                const story = produtosCache[id] = snapshot.val();
+                produtosCache[id] = snapshot.val();
+                produtosCache[id].qtd = qtd;
+                const story = produtosCache[id];
                 resolve(story);
             }, reject);
         }
@@ -33,16 +35,17 @@ lista.fetchListaProdutos = id => {
 
         api.child('users/douglas/listas').once('value', snapshot => {
             let ids = snapshot.val();
-            resolve( lista.fetchProdutos(Object.keys(ids) ));
+
+            resolve( lista.fetchProdutos(Object.keys(ids), ids ));
         }, reject);
     })
 };
 
-lista.fetchProdutos = ids => {
+lista.fetchProdutos = (ids, itens) => {
     if (!ids || !ids.length) {
         return Promise.resolve(produtosIds)
     } else {
-        return Promise.all(ids.map(id => lista.fetchProduto(id)))
+        return Promise.all(ids.map(id => lista.fetchProduto(id, itens[id])))
       //  return produtosIds
     }
 };

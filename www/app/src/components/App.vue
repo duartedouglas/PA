@@ -4,12 +4,9 @@
         <SideBar> </SideBar>
 
         <main class="mdl-layout__content mdl-color--grey-100">
-
             <router-view></router-view>
-
         </main>
     </div>
-
 </template>
 <script>
     import Navbar from './Navbar.vue';
@@ -23,12 +20,12 @@
                 accountDetails:{}
             }
         },
-        components:{
+        components: {
             Navbar,
             Sidebar
         },
         ready(){
-
+            console.log('hguuytuy')
         }
     }
 </script>
