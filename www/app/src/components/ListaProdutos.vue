@@ -68,7 +68,7 @@
             }
         },
         created() {
-
+            this.$parent.headerVisible = true;
             this.$parent.title = this.$route.params.lista;
             if (this.produtos.length == 0) {
                 lista.fetchListaProdutos().then( p => {

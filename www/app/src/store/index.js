@@ -2,23 +2,36 @@ import Firebase from './fb'
 import { EventEmitter } from 'events'
 import { Promise } from 'es6-promise'
 
- const api = Firebase.database().ref('produtos');
+const api = Firebase.database().ref('produtos');
 
 // const api = new Firebase('https://menorpreco.firebaseio.com')
-const itemsCache = Object.create(null)
-const store = new EventEmitter()
-const storiesPerPage = store.storiesPerPage = 30
+const itemsCache = Object.create(null);
+const store = new EventEmitter();
+const storiesPerPage = store.storiesPerPage = 30;
 
-let produtosIds = []
+let produtosIds = JSON.parse(sessionStorage.getItem('produtos')) || {};
 
-export default store
+export default store;
 
+if(Object.keys(produtosIds).length == 0){
+  api.on('value', snapshot => {
+    produtosIds = snapshot.val();
 
-api.on('value', snapshot => {
-  produtosIds = snapshot.val();
-
-  store.emit('produtos-updated', produtosIds);
-});
+    Object.keys(produtosIds).forEach(i => {
+      produtosIds[i].checked = true;
+      itemsCache[i] = produtosIds[i];
+    });
+    sessionStorage.setItem('produtos',JSON.stringify(itemsCache) );
+    store.emit('produtos-updated', itemsCache);
+  });
+} else {
+  Object.keys(produtosIds).forEach(i => {
+    produtosIds[i].checked = true;
+    itemsCache[i] = produtosIds[i];
+  });
+  sessionStorage.setItem('produtos',JSON.stringify(itemsCache) );
+  store.emit('produtos-updated', itemsCache);
+}
 
 
 store.fetchProduto = id => {
@@ -26,13 +39,13 @@ store.fetchProduto = id => {
     if (itemsCache[id]) {
       resolve(itemsCache[id])
     } else {
-      api.child('produtos/' + id).on('child_added', snapshot => {
+      api.child('produtos/' + id).on('value', snapshot => {
         const story = itemsCache[id] = snapshot.val()
         resolve(story)
       }, reject)
     }
   })
-}
+};
 
 /**
  * Fetch the given list of items.
@@ -45,8 +58,7 @@ store.fetchProdutos = ids => {
   if (!ids || !ids.length) {
     return Promise.resolve(produtosIds)
   } else {
-     return Promise.all(ids.map(id => store.fetchProduto(id)))
-
+     return Promise.all(ids.map(id => store.fetchProduto(id)));
      //return produtosIds
   }
 }

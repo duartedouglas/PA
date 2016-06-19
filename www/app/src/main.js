@@ -8,7 +8,10 @@ import Produtos from './components/Produtos.vue'
 import ListaProdutos from './components/ListaProdutos.vue'
 import Categoria from './components/Categorias.vue';
 import Login from './components/Login.vue';
+import Mapa from './components/Mapa.vue';
+import VueMdl from 'vue-mdl'
 
+Vue.use(VueMdl);
 // install router
 Vue.use(Router);
 Vue.use(lazyload, {
@@ -39,6 +42,9 @@ router.map({
   },
   '/login/': {
     component: Login
+  },
+  '/mapa/': {
+    component: Mapa
   },
   '/categorias/': {
     component: Categoria,

@@ -69,34 +69,9 @@
         ready(){
          Firebase.auth().onAuthStateChanged((user) =>{
            if (user) {
-
-              console.log(user.uid);
              if(user.isAnonymous){
              }
              this.user = user;
-
-             var displayName = user.displayName;
-             var email = user.email;
-             var emailVerified = user.emailVerified;
-             var photoURL = user.photoURL;
-             var isAnonymous = user.isAnonymous;
-             var uid = user.uid;
-             var refreshToken = user.refreshToken;
-             var providerData = user.providerData;
-
-             this.accountDetails = {
-               displayName: displayName,
-               email: email,
-               emailVerified: emailVerified,
-               photoURL: photoURL,
-               isAnonymous: isAnonymous,
-               uid: uid,
-               refreshToken: refreshToken,
-               providerData: providerData
-             };
-           } else {
-             this.signin = 'Entrar com Google';
-             this.accountDetails = 'null';
            }
          });
         },

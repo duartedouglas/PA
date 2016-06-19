@@ -35,8 +35,10 @@
   "dependencies": {
     "es6-promise": "^3.0.2",
     "firebase": "^3.0.0",
+    "load-google-maps-api": "0.0.2",
     "vue": "^1.0.8",
     "vue-lazyload": "^0.4.3",
+    "vue-mdl": "^0.8.4",
     "vue-router": "^0.7.5"
   }
 }

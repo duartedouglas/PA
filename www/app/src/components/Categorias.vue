@@ -2,16 +2,17 @@
 
     <div class=" mdl-grid">
         <ul class="mdl-list">
-            <!--{{ categorias | json}}-->
+            {{ favoritos | json}}
             <li v-for="c in categorias" class="mdl-list__item mdl-color--white">
                 <span class="mdl-list__item-primary-content" v-link="{ path: '/404' }">
-                    <img v-lazy="c.thumb.url" alt="" class="mdl-list__item-avatar">
+                    <img :src="c.thumb.url" alt="" class="mdl-list__item-avatar">
                     <!--<i class="material-icons ">person</i>-->
                     {{c.nome}}
-                </span>
+                </span
                 <span class="mdl-list__item-secondary-content">
                     <!--<span class="mdl-list__item-secondary-info">add</span>-->
-                    <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                    <mdl-icon-toggle :checked.sync="favoritos" icon="star" :value="c.id"></mdl-icon-toggle>
+                    <!--<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>-->
                 </span>
             </li>
         </ul>
@@ -29,6 +30,7 @@
     export default{
         data() {
             return{
+                favoritos:[ 500, 487, 502, 564 ],
                 categorias:[]
             }
         },

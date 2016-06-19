@@ -4,21 +4,23 @@
     <div class="mdl-color--white">
         <div class="mdl-grid">
             <!-- MDL Spinner Component -->
-            <div v-if="produtos.length ==0" style="top: 50%; margin: 0 auto;" class="mdl-spinner mdl-js-spinner is-active"></div>
-            <ul class="mdl-list">
-                <!--{{produtos | json}}-->
+            <mdl-spinner :active="produtos.length ==0"></mdl-spinner>
+            <!--<div v-if="" style="top: 50%; margin: 0 auto;" class="mdl-spinner mdl-js-spinner is-active"></div>-->
+            <ul class="mdl-list ">
+                {{checked | json}}
                 <li v-for="p in produtos" class="mdl-list__item mdl-color--white">
+
                     <span class="mdl-list__item-primary-content">
-                        <img v-lazy="p.thumbnail.formats[0].formats.url" alt="" class="mdl-list__item-avatar">
+                        <img :src="p.thumbnail.formats[0].formats.url" alt="" class="mdl-list__item-avatar">
                         <!--<i class="material-icons ">person</i>-->
                         {{p.productname}}
                     </span>
                     <span class="mdl-list__item-secondary-content">
-                        <span class="mdl-list__item-secondary-info">
-                            {{p.Preco || 'indisponivel'}} hgghg
-                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-                                <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
-                            </label>
+                        <span class="mdl-list__item-secondary-info preco">
+                            {{p.preco || 'indisponivel'}}
+
+                            <mdl-switch :checked.sync="checked" value="p.id"></mdl-switch>
+
                         </span>
                     </span>
                 </li>
@@ -32,6 +34,11 @@
 </template>
 
 <style scoped>
+    .preco{
+        font-size: 16px!important;
+        color: rgb(63,81,181)!important;
+        font-weight: 500!important;
+    }
     ul.mdl-list{
         width: 100%;
     }
@@ -50,24 +57,36 @@
         margin: 0 5px 0 0;
         box-shadow: #757575 0.2px 0.4px 0.1px 0.1px;
     }
+    .list-radio {
+        display: inline;
+    }
 </style>
 <script>
 
-    import store from '../store'
+    import store from '../store';
+
     export default{
         name:"produtos",
         data(){
             return {
-                produtos:[]
+                produtos:[],
+                checked:true
             }
         },
-        //created (){
-        //    if (this.produtos.length == 0) {
-        //        this.produtos = store.fetchProdutos(['']);
-        //    }
-        //},
-        created () {
-            store.on('produtos-updated', this.update)
+//        created (){
+//            if (this.produtos.length == 0) {
+//                store.fetchProdutos(['']).then(p => {
+//                    this.produtos = p;
+//                    console.log(this.produtos)
+//                });
+//            }
+//        },
+        ready () {
+            this.$parent.headerVisible = true;
+            store.fetchProdutos([]).then(p => {
+                this.produtos = p;
+            });
+            store.on('produtos-updated', this.update);
         },
 
         methods: {

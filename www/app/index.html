@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="static/lib/material.indigo-blue.min.css" />
   <!--<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.cyan-light_blue.min.css">-->
   <link rel="stylesheet" href="static/styles.css">
+  <!--<script src="https://maps.googleapis.com/maps/api/js?libraries=places&signed_in=false&callback=initMap" async defer></script>-->
   <style>
     .circle-button {
       position: fixed;
@@ -48,10 +49,9 @@
 
   </div>
 
-  <script src="static/lib/material.min.js"></script>
-  <script src="static/build.js"></script>
   <script>
-  //  if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+//    let mapPromise ;
+    if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
 
       navigator.serviceWorker.register('sw.js', {
         scope: './'
@@ -63,7 +63,19 @@
         console.error('Error during service worker registration:', e);
       });
 
-  //  }
+    }
+
+    function initMap() {
+      mapPromise = new Promise((resolve, reject) => {
+
+        resolve();
+      });
+    }
   </script>
+
+
+  <script src="static/lib/material.min.js"></script>
+  <script src="static/build.js"></script>
+
   </body>
 </html>

@@ -1,19 +1,13 @@
 <template>
 
-    <header class="mdl-layout__header is-casting-shadow">
+    <header class="mdl-layout__header is-casting-shadow" v-show="visible">
 
         <div class="mdl-layout__header-row">
             <span class="mdl-layout-title"  v-show="!inputFocus">{{ title }}</span>
             <div class="mdl-layout-spacer"></div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-                    <i class="material-icons">search</i>
-                </label>
-                <div class="mdl-textfield__expandable-holder">
-                    <input class="mdl-textfield__input" type="text" id="search">
-                    <label class="mdl-textfield__label" for="search">pesquise produtos</label>
-                </div>
-            </div>
+
+            <mdl-textfield id="demo-expandable-button" expandable="search"></mdl-textfield>
+
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
                 <i class="material-icons">more_vert</i>
             </button>
@@ -40,7 +34,7 @@
 
     export default {
         name: 'Navbar',
-        props:['title'],
+        props:['title', 'visible'],
         data(){
             return{
                 inputFocus:false

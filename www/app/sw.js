@@ -15,13 +15,13 @@ var files = [
 if (typeof files == 'undefined') {
     var files = [];
 } else {
-    // files.push('./');
+     files.push('./');
 }
 
-var CACHE_NAME = 'menorpreco-v3';
+var CACHE_NAME = 'menorpreco-v4';
 
 self.addEventListener('activate', function(event) {
-    console.log('[SW] Activate');
+    // console.log('[SW] Activate');
     event.waitUntil(
         caches.keys().then(function(cacheNames) {
             return Promise.all(
@@ -37,11 +37,12 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('install', function(event){
-    console.log(' Install');
+    // console.log(' Install');
     event.waitUntil(
         caches.open(CACHE_NAME).then(function(cache) {
             return Promise.all(
                 files.map(function(file){
+
                     return cache.add(file);
                 })
             );
@@ -50,7 +51,10 @@ self.addEventListener('install', function(event){
 });
 
 self.addEventListener('fetch', function(event) {
-    console.log(' fetch ' + event.request.url);
+     // console.log(' fetch ' + event.request.url);
+    if(/.jpg/.test(event.request.url)){
+        return;
+    }
     event.respondWith(
         caches.match(event.request).then(function(response){
             return response || fetch(event.request.clone());
@@ -59,6 +63,6 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener('notificationclick', function(event) {
-    console.log('notification click: ', event);
+    // console.log('notification click: ', event);
     clients.openWindow('/');
 });

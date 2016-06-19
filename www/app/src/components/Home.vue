@@ -1,7 +1,7 @@
 <template>
     <search-box></search-box>
     <div class="mdl-color--white">
-        <div class="mdl-grid">
+        <div class="flex center wrap">
             <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
                 <div  v-link="{ path: '/lista/supermercado' }" class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
                     <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="demo-separator mdl-cell--1-col"></div>
-
+                <mdl-textfield id="expandable-button" type="number" expandable="search1"></mdl-textfield>
                 <!--<div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">-->
                 <!--<div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">-->
                 <!--<h3>View options</h3>-->
@@ -53,26 +53,22 @@
                 <!--</div>-->
                 <!--</div>-->
 
-
-
             </div>
         </div>
-        <dialog class="mdl-dialog">
-            <div class="mdl-dialog__content">
-                <p>
-                    Digite um nome para a lista
-                </p>
 
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="nomeLista" type="text" id="nomeLista">
-                    <label class="mdl-textfield__label"  for="nomeLista">Supermercado...</label>
-                </div>
-            </div>
-            <div class="mdl-dialog__actions">
-                <button @click="salvaLista" type="button" class="mdl-button">Ok</button>
-                <button @click="cancelar" type="button" class="mdl-button close">Cancelar</button>
-            </div>
-        </dialog>
+        <mdl-dialog v-ref:criarLista title="Criar Lista">
+            <p>
+                Digite um nome para a lista
+            </p>
+            <mdl-textfield label="Supermercado..." :value.sync="nomeLista"></mdl-textfield>
+
+            <template slot="actions">
+
+                <mdl-button primary @click="salvaLista" >Ok</mdl-button>
+                <mdl-button @click="cancelar">Cancelar</mdl-button>
+            </template>
+        </mdl-dialog>
+
         <button @click="criarLista" class="circle-button  mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
             <i class="material-icons">add</i>
         </button>
@@ -91,33 +87,29 @@
             return {
                 title:'Menor Preço',
                 nomeLista:'',
-                dialog:null
             }
         },
         created(){
-            this.$parent.title = 'Menor Preço';
+
         },
         components: {
             SearchBox
         },
         ready(){
+            this.$parent.title = this.title;
+            this.$parent.headerVisible = true;
 
-            this.dialog = document.querySelector('dialog');
         },
         methods: {
             criarLista() {
-
-                if (! this.dialog.showModal) {
-                    dialogPolyfill.registerDialog(dialog);
-                }
-                this.dialog.showModal();
+                this.$refs.criarlista.open();
             },
             cancelar() {
 
-                this.dialog.close();
+                this.$refs.criarlista.close();
             },
             salvaLista() {
-                this.dialog.close();
+                this.$refs.criarlista.close();
             }
         }
     }
