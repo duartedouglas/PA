@@ -5,13 +5,15 @@
         <div class="mdl-grid">
             <!-- MDL Spinner Component -->
             <mdl-spinner :active="produtos.length ==0"></mdl-spinner>
-            <!--<div v-if="" style="top: 50%; margin: 0 auto;" class="mdl-spinner mdl-js-spinner is-active"></div>-->
+
+            <div class="label">Adicionar aos Favoritos</div>
+
             <ul class="mdl-list ">
-                {{checked | json}}
+
                 <li v-for="p in produtos" class="mdl-list__item mdl-color--white">
 
                     <span class="mdl-list__item-primary-content">
-                        <img :src="p.thumbnail.formats[0].formats.url" alt="" class="mdl-list__item-avatar">
+                        <img :src="p.thumbnail.formats[0].formats.url" alt="" class="mdl-list-item-avatar">
                         <!--<i class="material-icons ">person</i>-->
                         {{p.productname}}
                     </span>
@@ -19,21 +21,22 @@
                         <span class="mdl-list__item-secondary-info preco">
                             {{p.preco || 'indisponivel'}}
 
-                            <mdl-switch :checked.sync="checked" value="p.id"></mdl-switch>
+                            <mdl-switch :checked.sync="favoritos" :value="p.id"></mdl-switch>
 
                         </span>
                     </span>
                 </li>
             </ul>
         </div>
-        <button  class="circle-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+       <!--  <button  class="circle-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
             <i class="material-icons">add</i>
-        </button>
+        </button> -->
     </div>
 
 </template>
 
 <style scoped>
+    .label,
     .preco{
         font-size: 16px!important;
         color: rgb(63,81,181)!important;
@@ -43,6 +46,7 @@
         width: 100%;
     }
     li.mdl-list__item.mdl-color--white {
+        padding: 10px;
         margin-bottom: 0;
         line-height: inherit;
         box-shadow: #757575 0.3px 0.3px 0.1px 0.3px;
@@ -69,8 +73,9 @@
         name:"produtos",
         data(){
             return {
-                produtos:[],
-                checked:true
+                produtos:{},
+                countProdutos: 0,
+                favoritos:[]
             }
         },
 //        created (){
@@ -82,6 +87,7 @@
 //            }
 //        },
         ready () {
+            this.countProdutos = Object.keys(this.produtos).length;
             this.$parent.headerVisible = true;
             store.fetchProdutos([]).then(p => {
                 this.produtos = p;

@@ -7,4 +7,3 @@ var config = {
 };
 Firebase.initializeApp(config);
 export default Firebase;
-
