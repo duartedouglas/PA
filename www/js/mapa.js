@@ -1,80 +1,179 @@
-var geocoder;
-var map;
-var marker;
+// var geocoder;
+// var map;
+// var marker;
 
-var infowindow;
+// var infowindow;
 
 var firebaseRef = new Firebase("https://menorpreco.firebaseio.com/");
 
-function buscaSupermercados(map, posicao) {
-
-  // var posicao = {lat: -19.981394, lng: -44.003248};
-
-    //map.setCenter(posicao);
-
-    infowindow = new google.maps.InfoWindow();
-
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-       location: posicao,
-       radius: 5000,
-       types: ['grocery_or_supermarket']
-    }, callback);
-}
-
-function callback(results, status) {
-  if (status === google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
-      console.log(results[i]);
-
-	  firebaseRef.child('estabelecimentos/'+ results[i].place_id).update(
-		  {
-			  place_id:results[i].place_id,
-			  location: {
-				  lat:results[i].geometry.location.lat(),
-				  lng:results[i].geometry.location.lat()
-			  },
-			  nome:results[i].name,
-			  endereco:results[i].vicinity,
-		  }
-	  );
-    }
-
-  }
-}
-
-function createMarker(place) {
-	if (place.geometry.viewport) {
-		map.fitBounds(place.geometry.viewport);
-	} else {
-		map.setCenter(place.geometry.location);
-		map.setZoom(17);
+'use strict';
+class Supermercado {
+	constructor(props) {
+		this.placeId = props.place_id;
+		this.nome = props.name;
+		this.endereco = props.vicinity;
+		this.location = props.geometry.location;
 	}
-	var marker = new google.maps.Marker({
-		map: map,
-		position: place.geometry.location,
+}
 
+class Mapa {
+	constructor(map){
+		this.mapsInstance = map;
+
+	}
+
+	buscaSupermercados(posicao) {
+		let mercados = [];
+		let service = new google.maps.places.PlacesService(this.mapsInstance);
+		return new Promise((resolve, reject) => {
+			service.nearbySearch({
+				location: posicao,
+				radius: 2000,//raio em metros
+				types: ['grocery_or_supermarket']
+			}, (results, status) => {
+				if (status === google.maps.places.PlacesServiceStatus.OK) {
+					for (let i = 0; i < results.length; i++) {
+						let mercado = new Supermercado(results[i]);
+						this.createMarker(mercado);
+						mercados.push(mercado);
+					}
+					this.mapsInstance.setCenter(posicao);
+					resolve(mercados);
+				}
+			});
+		});
+	}
+
+	createMarker(mercado) {
+		var info = new google.maps.InfoWindow();
+
+		var marker = new google.maps.Marker({
+			map: this.mapsInstance,
+			position: mercado.location,
+			infowindow:info
+		});
+
+		//marker.infowindow.open(this.mapsInstance, marker);
+
+		google.maps.event.addListener(marker, 'click',() =>{
+
+			marker.infowindow.setContent( '<b>'+mercado.nome+'</b><br>'+mercado.endereco  );
+			marker.infowindow.open(this.mapsInstance, marker);
+		});
+	}
+
+	localize() {
+        return new Promise((resolve, reject) => {
+			if (navigator.geolocation) {
+				let timeoutVal = 10 * 1000 * 1000;
+				navigator.geolocation.getCurrentPosition(
+					(geoposition) => {
+						console.log(geoposition);
+						this.buscaSupermercados({
+							lat: geoposition.coords.latitude,
+							lng: geoposition.coords.longitude
+						}).then(lojas=>{
+							console.table(lojas)
+							resolve(lojas);
+						});
+					},
+					this.displayError.bind(this),
+					{ enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+				);
+			}
+			else {
+				alert("Geolocalização não  e suportada pelo seu browser.");
+				reject("Geolocalização não  e suportada pelo seu browser.");
+			}
+		});
+
+	}
+
+	displayError(error) {
+		var errors = {
+			1: 'Permission denied',
+			2: 'Position unavailable',
+			3: 'Request timeout'
+		};
+		alert("Error: " + errors[error.code]);
+	}
+}
+
+function initMap() {
+
+	let map = new google.maps.Map(document.getElementById('mapa'), {
+		center: {lat: -19.9166813, lng: -43.996094899999996},
+		zoom: 13,
+		disableDefaultUI: true,
 	});
-	infowindow.open(map, marker);
 
-	$('#enviar').on('click', function (e) {
+	let mapa = new Mapa(map);
+	let input = document.getElementById('txtEndereco');
+	let localize = document.getElementById('localizar');
+
+	localize.addEventListener('click',function (e) {
 		e.preventDefault();
-		var email = $(".modal-body").find("#email").val();
-		var lat = $('#txtLatitude').val();
-		var long = $('#txtLongitude').val();
-		$('#myModal').modal('hide');
-		console.log(email, lat, long);
-	})
-
-	google.maps.event.addListener(marker, 'mouseover', function() {
-
-		console.log(place)
-		//$('#myModal').modal('show');
-
-		infowindow.setContent(place.name+'<br>'+place.vicinity);
-		infowindow.open(map, this);
+		mapa.localize()
+			.then(salvaSupermercados);
 	});
+
+	let autocomplete = new google.maps.places.Autocomplete(input);
+	autocomplete.bindTo('bounds', map);
+
+
+	//carrega supermercados
+	let lojas = JSON.parse(localStorage.getItem('supermercados') );
+	if(lojas !== null){
+
+		lojas.forEach(loja => {
+			mapa.createMarker(loja);
+		});
+		map.setCenter(lojas[0].location)
+	}
+
+	// map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+	// map.controls[google.maps.ControlPosition.TOP_LEFT].push(localize);
+
+	autocomplete.addListener('place_changed', function() {
+
+		let place = autocomplete.getPlace();
+		if (!place.geometry) {
+			return;
+		}
+
+		if (place.geometry.viewport) {
+			map.fitBounds(place.geometry.viewport);
+		} else {
+			map.setCenter(place.geometry.location);
+			map.setZoom(17);
+		}
+
+		setTimeout(()=>{
+			mapa.buscaSupermercados(place.geometry.location)
+				.then(salvaSupermercados);
+		}, 1000);
+	});
+}
+
+function salvaSupermercados(lojas){
+	//console.table(lojas);
+
+	lojas.forEach(loja => {
+		console.log(loja)
+		firebaseRef.child('estabelecimentos/'+ loja.placeId).update({
+			place_id:loja.placeId,
+			location: {
+				lat:loja.location.lat(),
+				lng:loja.location.lat()
+			},
+			nome:loja.nome,
+			endereco:loja.endereco,
+		});
+	});
+	console.log('salvo no firebase');
+	localStorage.setItem('supermercados', JSON.stringify(lojas));
+	console.log('salvo no localStorage');
+	return lojas;
 }
 
 function initialize() {
@@ -102,7 +201,7 @@ function initialize() {
 
 $(document).ready(function () {
 
-	initialize();
+	//initialize();
 
 	function carregarNoMapa(endereco) {
 		geocoder.geocode({ 'address': endereco + ', Brasil', 'region': 'BR' }, function (results, status) {
@@ -128,14 +227,14 @@ $(document).ready(function () {
 	$("#btnEndereco").click(function() {
 		if($(this).val() != "")
 			carregarNoMapa($("#txtEndereco").val());
-	})
+	});
 	
-	$("#txtEndereco").blur(function() {
-		$(this).addClass('fixed');
-		$('#mapa').height($(window).height());
-		if($(this).val() != "")
-			carregarNoMapa($(this).val());
-	})
+	// $("#txtEndereco").blur(function() {
+	// 	$(this).addClass('fixed');
+	// 	$('#mapa').height($(window).height());
+	// 	if($(this).val() != "")
+	// 		carregarNoMapa($(this).val());
+	// })
 	
 	// google.maps.event.addListener(marker, 'drag', function () {
 	// 	geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
