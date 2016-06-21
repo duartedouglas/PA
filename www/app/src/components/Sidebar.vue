@@ -18,7 +18,7 @@
                     <li v-if="!user.displayName" class="mdl-menu__item">
                         <a v-link="{path:'/login'}"><i class="material-icons">assignment_ind</i>login</a>
                     </li>
-                    <li v-if="user.displayName" @click="logout" class="mdl-menu__item"><i class="material-icons">exit_to_app</i>Sair</li>
+                    <li v-if="user.uid" @click="logout" class="mdl-menu__item"><i class="material-icons">exit_to_app</i>Sair</li>
                 </ul>
             </div>
         </header>
