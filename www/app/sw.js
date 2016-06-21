@@ -2,13 +2,12 @@
  * Created by douglas on 17/06/16.
  */
 var files = [
-    // "index.html",
+    "index.html",
     "static/lib/material.indigo-blue.min.css",
     "static/styles.css",
     "https://fonts.googleapis.com/icon?family=Material+Icons",
     "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en",
     "static/lib/material.min.js"
-
     // "js/lib/quagga.min.js"
 ];
 // dev only
@@ -18,7 +17,7 @@ if (typeof files == 'undefined') {
      files.push('./');
 }
 
-var CACHE_NAME = 'menorpreco-v1';
+var CACHE_NAME = 'menorpreco-v5';
 
 self.addEventListener('activate', function(event) {
     // console.log('[SW] Activate');
@@ -42,7 +41,6 @@ self.addEventListener('install', function(event){
         caches.open(CACHE_NAME).then(function(cache) {
             return Promise.all(
                 files.map(function(file){
-
                     return cache.add(file);
                 })
             );
