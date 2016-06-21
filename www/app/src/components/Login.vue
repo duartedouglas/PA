@@ -1,4 +1,5 @@
 <template>
+<main class="mdl-layout__content mdl-color--grey-100">
   <div class="mdl-cell--12-col mdl-grid">
     <div class="mdl-card mdl-shadow--6dp">
 
@@ -25,6 +26,7 @@
         
     </div>
   </div>
+  </main>
 </template>
 <style scoped>
     .mdl-shadow--6dp{

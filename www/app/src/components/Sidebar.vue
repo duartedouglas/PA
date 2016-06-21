@@ -8,10 +8,10 @@
             <div class="demo-avatar-dropdown">
                 <span>{{ user.displayName }}</span>
                 <div class="mdl-layout-spacer"></div>
-                <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                <mdl-button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
                     <i class="material-icons" role="presentation">arrow_drop_down</i>
                     <span class="visuallyhidden">Accounts</span>
-                </button>
+                </mdl-button>
                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
 
                     <li class="mdl-menu__item">{{ user.email }}</li>
@@ -38,8 +38,8 @@
                 Categorias
             </a>
 
-            <a class="mdl-navigation__link" v-link="{ path: '/login' }">
-                <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a>
+            <a class="mdl-navigation__link" v-link="{ path: '/mapa' }">
+                <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">location_on</i>Mapa</a>
 
             <div class="mdl-layout-spacer"></div>
             <a class="mdl-navigation__link" v-link="{ path: '/404' }">

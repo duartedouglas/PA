@@ -8,9 +8,9 @@
 
             <mdl-textfield id="demo-expandable-button" expandable="search"></mdl-textfield>
 
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-                <i class="material-icons">more_vert</i>
-            </button>
+            <mdl-button icon id="hdrbtn">
+                <i class="material-icons" style="color: #fff">more_vert</i>
+            </mdl-button>
             <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
                 <li class="mdl-menu__item">Sobre</li>
                 <li class="mdl-menu__item">Configurações</li>

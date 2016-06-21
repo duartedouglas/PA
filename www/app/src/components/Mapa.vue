@@ -1,18 +1,21 @@
 <template>
+    <div style="width: 100%;height: 100%">
 
         <input id="busca-endereco" class="controls" type="text" placeholder="Digite o cep ou endereço">
-        <button id="localize" class="circle-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-            <i class="material-icons">add</i>
-        </button>
+        <mdl-button id="localize" class="circle-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+            <i class="material-icons">location_on</i>
+        </mdl-button>
 
         <div id="map" v-el:map="map"></div>
-
-
+    </div>
 </template>
 <style scoped>
-    #map {
+    html, body, #map {
+        margin: 0;
+        padding: 0;
         height: 100%;
     }
+
     .controls {
         background-color: #fff;
         border-radius: 2px;
@@ -23,12 +26,12 @@
         font-size: 15px;
         font-weight: 300;
         height: 29px;
-        margin-left: 17px;
         margin-top: 10px;
         outline: none;
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
-        width: 400px;
+        width: 95%;
+        margin: 9px;
     }
 
     .controls:focus {
@@ -56,7 +59,8 @@
 
                     this.map = new google.maps.Map(this.$els.map, {
                         center: {lat: -19.9166813, lng: -43.996094899999996},
-                        zoom: 13
+                        zoom: 13,
+                        disableDefaultUI: true,
                     });
                     let mapa = new Mapa(this.map);
                     let input = document.getElementById('busca-endereco');
@@ -84,6 +88,7 @@
                         } else {
                             this.map.setCenter(place.geometry.location);
                             this.map.setZoom(17);
+                            google.maps.event.trigger(this.map, 'resize');
                         }
 
                          setTimeout(()=> {

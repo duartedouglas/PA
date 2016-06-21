@@ -1,6 +1,6 @@
 
 <template>
-
+ <main class="mdl-layout__content mdl-color--grey-100">
     <div class="mdl-color--white">
         <div class="mdl-grid">
             <!-- MDL Spinner Component -->
@@ -32,10 +32,11 @@
             <i class="material-icons">add</i>
         </button> -->
     </div>
-
+</main>
 </template>
 
 <style scoped>
+    
     .label,
     .preco{
         font-size: 16px!important;

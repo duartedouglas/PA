@@ -17,7 +17,7 @@ if (typeof files == 'undefined') {
      files.push('./');
 }
 
-var CACHE_NAME = 'menorpreco-v5';
+var CACHE_NAME = 'menorpreco-v2';
 
 self.addEventListener('activate', function(event) {
     // console.log('[SW] Activate');

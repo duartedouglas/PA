@@ -2,10 +2,9 @@
     <div>
         <Navbar :title.sync="title" :visible.sync="headerVisible"> </Navbar>
         <SideBar> </SideBar>
+        
+        <router-view></router-view>
 
-        <main class="mdl-layout__content mdl-color--grey-100">
-            <router-view></router-view>
-        </main>
     </div>
 </template>
 <script>

@@ -1,6 +1,7 @@
 <template>
-
+ <main class="mdl-layout__content mdl-color--grey-100">
     <div class=" mdl-grid">
+        <mdl-spinner :active="categorias.length ==0"></mdl-spinner>
         <ul class="mdl-list">
             {{ favoritos | json}}
             <li v-for="c in categorias" class="mdl-list__item mdl-color--white">
@@ -17,11 +18,13 @@
             </li>
         </ul>
     </div>
+</main>
 </template>
 <style scoped>
     ul.mdl-list{
         width: 100%;
     }
+    
 </style>
 <script>
 

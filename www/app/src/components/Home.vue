@@ -1,4 +1,5 @@
 <template>
+<main class="mdl-layout__content mdl-color--grey-100">
     <search-box></search-box>
     <div class="mdl-color--white">
         <div class="flex center wrap">
@@ -74,7 +75,7 @@
         </button>
 
     </div>
-
+</main>
 </template>
 <style>
 

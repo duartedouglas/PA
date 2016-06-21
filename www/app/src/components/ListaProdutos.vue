@@ -1,9 +1,8 @@
 <template>
-    <div class="mdl-color--white">
+    <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mg-grid">
-
             <!-- MDL Spinner Component -->
-            <div v-if="produtos.length ==0" style="top: 50%; margin: 0 auto;" class="mdl-spinner mdl-js-spinner is-active"></div>
+             <mdl-spinner :active="produtos.length ==0"></mdl-spinner>
             <ul class="mdl-list">
                 <!--{{produtos | json}}-->
                 <li v-for="p in produtos" class="mdl-list__item mdl-color--white">
@@ -13,7 +12,7 @@
                     {{p.productname}}
                 </span>
                 <span class="mdl-list__item-secondary-content">
-                    <!--<span class="mdl-list__item-secondary-info">add</span>-->
+                    <span class="mdl-list__item-secondary-info">{{p.preco}}</span>
                     <a class="mdl-list__item-secondary-action" href="#">
                         <input text="text"  v-model="p.qtd" class="qtd"/>
                         <!--<i class="material-icons">star</i>-->
@@ -26,9 +25,11 @@
         <a  class="circle-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
             <i class="material-icons" role="presentation">add</i>
         </a>
-    </div>
+
+    </main>
 </template>
 <style scoped>
+  
     ul.mdl-list{
         width: 100%;
     }

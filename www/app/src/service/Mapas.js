@@ -55,24 +55,30 @@ export default class Mapa {
     }
 
     localize() {
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                let timeoutVal = 10 * 1000 * 1000;
+                navigator.geolocation.getCurrentPosition(
+                    (geoposition) => {
+                        console.log(geoposition);
+                        this.buscaSupermercados({
+                            lat: geoposition.coords.latitude,
+                            lng: geoposition.coords.longitude
+                        }).then(lojas=>{
+                            console.table(lojas)
+                            resolve(lojas);
+                        });
+                    },
+                    this.displayError.bind(this),
+                    { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+                );
+            }
+            else {
+                alert("Geolocalização não  e suportada pelo seu browser.");
+                reject("Geolocalização não  e suportada pelo seu browser.");
+            }
+        });
 
-        if (navigator.geolocation) {
-            let timeoutVal = 10 * 1000 * 1000;
-            navigator.geolocation.getCurrentPosition(
-                (geoposition) => {
-                    console.log(geoposition);
-                    this.buscaSupermercados({
-                        lat: geoposition.coords.latitude,
-                        lng: geoposition.coords.longitude
-                    }).then(lojas=>console.table(lojas));
-                },
-                this.displayError.bind(this),
-                { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
-            );
-        }
-        else {
-            alert("Geolocalização não  e suportada pelo seu browser.");
-        }
     }
 
     displayError(error) {
