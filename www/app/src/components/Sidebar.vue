@@ -39,7 +39,7 @@
             </a>
 
             <a class="mdl-navigation__link" v-link="{ path: '/mapa' }">
-                <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">location_on</i>Mapa</a>
+                <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">location_on</i>Seus Lugares</a>
 
             <div class="mdl-layout-spacer"></div>
             <a class="mdl-navigation__link" v-link="{ path: '/404' }">
