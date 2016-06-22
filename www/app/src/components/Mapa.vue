@@ -2,10 +2,10 @@
     <div style="width: 100%;height: 100%">
 
         <input id="busca-endereco" class="controls" type="text" placeholder="Digite o cep ou endereço">
-        <mdl-button id="localize" class="circle-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-            <i class="material-icons">location_on</i>
+        <mdl-button id="localize" class="circle-button mdl-button mdl-js-button mdl-button--fab mdl-color--grey-100">
+            <i class="material-icons">gps_fixed</i>
         </mdl-button>
-
+        <mdl-spinner :active="loading"></mdl-spinner>
         <div id="map" v-el:map="map"></div>
     </div>
 </template>
@@ -44,67 +44,79 @@
     }
 </style>
 <script>
-    import Mapa, {Supermercado} from '../service/Mapas'
+    import Mapa, {Supermercado, salvaSupermercados} from '../service/Mapas'
     import loadGoogleMapsAPI from 'load-google-maps-api';
+
+    const mapsApi = loadGoogleMapsAPI({libraries: ['places']});
+
     export default{
         data(){
             return{
-
+                loading:true
             }
         },
         created(){
-            if(!this.map) {
+            
+            mapsApi.then((mappp) => {
 
-                loadGoogleMapsAPI({libraries: ['places']}).then((mappp) => {
+                this.map = new google.maps.Map(this.$els.map, {
+                    center: {lat: -19.9166813, lng: -43.996094899999996},
+                    zoom: 13,
+                    disableDefaultUI: true,
+                });
 
-                    this.map = new google.maps.Map(this.$els.map, {
-                        center: {lat: -19.9166813, lng: -43.996094899999996},
-                        zoom: 13,
-                        disableDefaultUI: true,
-                    });
-                    let mapa = new Mapa(this.map);
-                    let input = document.getElementById('busca-endereco');
-                    let localizar = document.getElementById('localize');
+                let mapa = new Mapa(this.map);
+                let input = document.getElementById('busca-endereco');
+                let localizar = document.getElementById('localize');
 
-                    localizar.addEventListener('click', function () {
-                        mapa.localize();
-                    });
-
-                    let autocomplete = new google.maps.places.Autocomplete(input);
-                    autocomplete.bindTo('bounds', this.map);
-
-                    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-//                    map.controls[google.maps.ControlPosition.TOP_LEFT].push(localize);
-
-                     autocomplete.addListener('place_changed', ()=> {
-
-                        let place = autocomplete.getPlace();
-                        if (!place.geometry) {
-                            return;
-                        }
-
-                        if (place.geometry.viewport) {
-                            this.map.fitBounds(place.geometry.viewport);
-                        } else {
-                            this.map.setCenter(place.geometry.location);
-                            this.map.setZoom(17);
-                            google.maps.event.trigger(this.map, 'resize');
-                        }
-
-                         setTimeout(()=> {
-                             mapa.buscaSupermercados(place.geometry.location).then(lojas => console.table(lojas));
-
-                             google.maps.event.trigger(this.map, 'resize');
-                         }, 1000);
+                localizar.addEventListener('click', function () {
+                    mapa.localize().then(lojas => {
+                        salvaSupermercados(lojas);
                     });
                 });
-            } else {
-                google.maps.event.trigger(this.map, 'resize');
-            }
 
+                let autocomplete = new google.maps.places.Autocomplete(input);
+                autocomplete.bindTo('bounds', this.map);
+                //carrega supermercados
+                let lojas = JSON.parse(localStorage.getItem('supermercados') );
+                mapa.carregaMarkers(lojas);
+
+                this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+                autocomplete.addListener('place_changed', ()=> {
+
+                    let place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        return;
+                    }
+
+                    if (place.geometry.viewport) {
+                        this.map.fitBounds(place.geometry.viewport);
+                    } else {
+                        this.map.setCenter(place.geometry.location);
+                        this.map.setZoom(17);
+                        google.maps.event.trigger(this.map, 'resize');
+                    }
+
+                     setTimeout(()=> {
+                        mapa.buscaSupermercados(place.geometry.location).then(lojas =>{ 
+                            salvaSupermercados(lojas);
+                        });
+
+                         google.maps.event.trigger(this.map, 'resize');
+                     }, 1000);
+                });
+                setTimeout(()=> {
+                    this.loading  = false;
+                    google.maps.event.trigger(this.map, 'resize');
+                }, 2000);
+            });
+            
         },
         methods:{
+          init(){
 
+          }
         }
     }
 </script>

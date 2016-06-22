@@ -30,13 +30,20 @@ lista.fetchProduto = (id, qtd) => {
     })
 };
 
-lista.fetchListaProdutos = id => {
+lista.fetchListaProdutos = nomeLista => {
+     let uid = localStorage.getItem('userUID');
     return new Promise((resolve, reject) => {
 
-        api.child('users/douglas/listas').once('value', snapshot => {
-            let ids = snapshot.val();
+        api.child('users/'+uid+'/listas/'+nomeLista).once('value', snap => {
+            let itens = snap.val();
+            if(!itens){
+                reject();
+                return;
+            }
+   
+            let ids = Object.keys(itens);
 
-            resolve( lista.fetchProdutos(Object.keys(ids), ids ));
+            resolve( lista.fetchProdutos(ids, itens ));
         }, reject);
     })
 };

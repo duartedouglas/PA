@@ -28,10 +28,10 @@
                 <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>
                 Home
             </a>
-            <a class="mdl-navigation__link" v-link="{ path: '/produtos' }">
+           <!--  <a class="mdl-navigation__link" v-link="{ path: '/produtos' }">
                 <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>
                 Produtos
-            </a>
+            </a> -->
 
             <a class="mdl-navigation__link" v-link="{ path: '/categorias' }">
                 <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>
@@ -68,11 +68,11 @@
         },
         ready(){
          Firebase.auth().onAuthStateChanged((user) =>{
-           if (user) {
+            this.user = user || {photoURL:'static/images/user.jpg'};
+            if (user) {
              if(user.isAnonymous){
              }
-             this.user = user;
-           }
+           } 
          });
         },
         methods:{

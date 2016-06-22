@@ -35,7 +35,12 @@ router.map({
     }
   },
   '/produtos/': {
-    component: Produtos
+    component: Produtos,
+    'subRoutes':{
+      '/produto/:id':{
+        component:Produtos
+      }
+    }
   },
   '/lista/:lista': {
     component: ListaProdutos

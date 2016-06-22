@@ -1,20 +1,17 @@
 'use strict';
-export class Supermercado {
-    constructor(props) {
-        this.placeId = props.place_id;
-        this.nome = props.name;
-        this.endereco = props.vicinity;
-        this.location = props.geometry.location;
-    }
-}
+
+import Firebase from '../store/fb';
+
+const firebaseRef = Firebase.database().ref();
 
 export default class Mapa {
     constructor(map){
         this.mapsInstance = map;
-
+        this.markers = [];
     }
 
     buscaSupermercados(posicao) {
+        this.removeMarkers();
         let mercados = [];
         let service = new google.maps.places.PlacesService(this.mapsInstance);
         return new Promise((resolve, reject) => {
@@ -44,7 +41,7 @@ export default class Mapa {
             position: mercado.location,
             infowindow:info
         });
-
+        this.markers.push(marker);
         //marker.infowindow.open(this.mapsInstance, marker);
 
         google.maps.event.addListener(marker, 'click',() =>{
@@ -52,6 +49,20 @@ export default class Mapa {
             marker.infowindow.setContent( '<b>'+mercado.nome+'</b><br>'+mercado.endereco  );
             marker.infowindow.open(this.mapsInstance, marker);
         });
+    }
+    removeMarkers() {
+        this.markers.forEach(m=>m.setMap(null));
+        this.markers = [];
+    }
+
+    carregaMarkers(lojas){
+
+      if(lojas !== null){
+          lojas.forEach(loja => {
+              this.createMarker(loja);
+          });
+          this.mapsInstance.setCenter(lojas[0].location);
+      }
     }
 
     localize() {
@@ -89,4 +100,33 @@ export default class Mapa {
         };
         alert("Error: " + errors[error.code]);
     }
+}
+
+export class Supermercado {
+    constructor(props) {
+        this.placeId = props.place_id;
+        this.nome = props.name;
+        this.endereco = props.vicinity;
+        this.location = props.geometry.location;
+    }
+}
+
+export function salvaSupermercados(lojas) {
+    //console.table(lojas);
+    lojas.forEach(loja => {
+        console.log(loja)
+        firebaseRef.child('estabelecimentos/'+ loja.placeId).update({
+            place_id:loja.placeId,
+            location: {
+                lat:loja.location.lat(),
+                lng:loja.location.lat()
+            },
+            nome:loja.nome,
+            endereco:loja.endereco,
+        });
+    });
+    console.log('salvo no firebase');
+    localStorage.setItem('supermercados', JSON.stringify(lojas));
+    console.log('salvo no localStorage');
+    return lojas;
 }

@@ -6,11 +6,11 @@
             <!-- MDL Spinner Component -->
             <mdl-spinner :active="produtos.length ==0"></mdl-spinner>
 
-            <div class="label">Adicionar aos Favoritos</div>
+            <div class="label">Adicionar a Lista</div>
 
             <ul class="mdl-list ">
 
-                <li v-for="p in produtos" class="mdl-list__item mdl-color--white">
+                <li v-for="p in produtos | filterBy search" class="mdl-list__item mdl-color--white">
 
                     <span class="mdl-list__item-primary-content">
                         <img :src="p.thumbnail.formats[0].formats.url" alt="" class="mdl-list-item-avatar">
@@ -21,12 +21,13 @@
                         <span class="mdl-list__item-secondary-info preco">
                             {{p.preco || 'indisponivel'}}
 
-                            <mdl-switch :checked.sync="favoritos" :value="p.id"></mdl-switch>
+                            <mdl-switch :checked.sync="lista" :value="p"></mdl-switch>
 
                         </span>
                     </span>
                 </li>
             </ul>
+            
         </div>
        <!--  <button  class="circle-button mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
             <i class="material-icons">add</i>
@@ -72,6 +73,15 @@
 
     export default{
         name:"produtos",
+        props:{
+            'search':{
+              type: String
+            },
+            'lista':{
+              type: Array,
+              default: ()=>[],
+            }
+        },
         data(){
             return {
                 produtos:{},
@@ -79,17 +89,19 @@
                 favoritos:[]
             }
         },
-//        created (){
-//            if (this.produtos.length == 0) {
-//                store.fetchProdutos(['']).then(p => {
-//                    this.produtos = p;
-//                    console.log(this.produtos)
-//                });
-//            }
-//        },
+       created (){
+           // if (this.produtos.length == 0) {
+           //     store.fetchProdutos(['']).then(p => {
+           //         this.produtos = p;
+           //         console.log(this.produtos)
+           //     });
+           // }
+       },
         ready () {
+
             this.countProdutos = Object.keys(this.produtos).length;
             this.$parent.headerVisible = true;
+            this.search = this.search || this.$parent.search;
             store.fetchProdutos([]).then(p => {
                 this.produtos = p;
             });

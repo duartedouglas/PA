@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Navbar :title.sync="title" :visible.sync="headerVisible"> </Navbar>
+        <Navbar :title.sync="title" :search.sync="search" :visible.sync="headerVisible"> </Navbar>
         <SideBar> </SideBar>
         
         <router-view></router-view>
@@ -16,6 +16,7 @@
         name: 'App',
         data(){
             return {
+                search:'',
                 title:'MenorPreço',
                 headerVisible:true,
             }
@@ -28,9 +29,8 @@
             this.headerVisible = true;
             Firebase.auth().onAuthStateChanged((user) => {
                 this.user = user;
+                console.log(user, 'staus change')
                 if (user) {
-
-                    console.log(user.uid);
                     if(user.isAnonymous){
                     }
 
@@ -42,6 +42,8 @@
                     var uid = user.uid;
                     var refreshToken = user.refreshToken;
                     var providerData = user.providerData;
+                    
+                    localStorage.setItem('userUID', uid);
 
                     this.accountDetails = {
                         displayName: displayName,
@@ -53,6 +55,8 @@
                         refreshToken: refreshToken,
                         providerData: providerData
                     };
+                } else{
+                    localStorage.removeItem('userUID');
                 }
             });
         }
